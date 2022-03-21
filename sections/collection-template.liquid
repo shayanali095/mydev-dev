@@ -235,9 +235,9 @@
 
 {% for filter in collection.filters %}
   {% for value in filter.values %}
-    
+  {{value.value }}  
   {% endfor %}
-  {{filter.type }}
+  
 {% endfor %}
 
 {% schema %}
