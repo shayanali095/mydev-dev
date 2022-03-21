@@ -1,0 +1,44 @@
+<div class="variants">
+    {% for product in collection.products %}
+    {% assign color_active = false %}
+    {% for option in product.options %}
+      {% if option == 'Color' %}
+         {% assign color_active = true %}
+      {% endif %}
+    {% endfor %}
+    {% if product.variants.size > 1 and color_active == true %}
+    {% for option in product.options %}
+       {% if option == 'Color' %}
+       {% assign index = forloop.index0 %}
+       {% assign colorlist = '' %}
+       {% assign color = '' %}
+    
+       {% for variant in product.variants %}
+       {% capture color %}
+       {{ variant.options[index] }}
+       {% endcapture %}
+    
+         {% unless colorlist contains color %}
+    `	<div class="product_card">
+            <div class="variant_image">
+              <img src="{{variant.featured_image | img_url: 'master'}}" alt="variant-title">
+            </div>
+            <div class="variant_title">{{product.title}}-{{color}}</div>
+        
+            <div class="variant_price">{{variant.price | money}}</div>
+        
+        </div>
+            
+            {% capture tempList %}
+          {{colorlist | append: color | append: " " }}
+          {% endcapture %}
+          {% assign colorlist = tempList %}
+          {% endunless %}
+          {% endfor %}
+        {% endif %}
+      {% endfor %}
+      {% else %}
+      <-- INSERT PRODUCT LOOP -->
+      {% endif %}
+    {% endfor %}
+        </div>
