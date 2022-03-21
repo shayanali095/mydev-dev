@@ -19,9 +19,10 @@
     {% endcapture %}
 
     {% unless colorlist contains color %}
+    
+    <a href="{{variant.url }}">
     ` <div class="product_card">
         <div class="variant_image">
-            <a href="{{variant.url }}">
                 <img src="{{variant.featured_image | img_url: 'master'}}" alt="variant-title">
             </a>
         </div>
