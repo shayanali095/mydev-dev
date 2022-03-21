@@ -20,17 +20,17 @@
 
     {% unless colorlist contains color %}
     <a href="{{variant.url }}">
-    ` <div class="product_card">
-        <div class="variant_image">
+        ` <div class="product_card">
+            <div class="variant_image">
                 <img src="{{variant.featured_image | img_url: 'master'}}" alt="variant-title">
-            
+
+            </div>
+            <div class="variant_title">{{product.title}}-{{color}}</div>
+
+            <div class="variant_price">{{variant.price | money}}</div>
+
         </div>
-        <div class="variant_title"><a href="{{variant.url }}">{{product.title}}-{{color}}</a></div>
-
-        <div class="variant_price">{{variant.price | money}}</div>
-
-    </div>
-
+    </a>
     {% capture tempList %}
     {{colorlist | append: color | append: " " }}
     {% endcapture %}
