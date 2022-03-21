@@ -20,13 +20,14 @@
   <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
    
   {{ 'color-variant-collection.css' | asset_url | stylesheet_tag }}
-  {{ '.css' | asset_url | stylesheet_tag }}
+  {{ 'product-filter.css' | asset_url | stylesheet_tag }}
 
   <link rel="preload" as="font" href="{{ header_font | font_url }}" type="font/woff2" crossorigin>
   <link rel="preload" as="font" href="{{ base_font | font_url }}" type="font/woff2" crossorigin>
   <link rel="preload" as="font" href="{{ base_font_bold | font_url }}" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
   <link rel="preload" href="{{ 'lazysizes.js' | asset_url }}" as="script">
+  <link rel="preload" href="{{ 'jQuery.fi.js' | asset_url }}" as="script">
 
   {%- if canonical_url != blank  -%}
     <link rel="canonical" href="{{ canonical_url }}">
