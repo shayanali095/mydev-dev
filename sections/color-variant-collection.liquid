@@ -21,6 +21,7 @@
          {% unless colorlist contains color %}
     `	<div class="product_card">
             <div class="variant_image">
+                <a href="{{}}"></a>
               <img src="{{variant.featured_image | img_url: 'master'}}" alt="variant-title">
             </div>
             <div class="variant_title"><a href="{{variant.url}}">{{product.title}}-{{color}}</a></div>
