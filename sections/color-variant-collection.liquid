@@ -1,14 +1,7 @@
 <div class="variants">
     {% for product in collection.products %}
     {% assign color_active = false %}
-    {% assign color_active = true %}
-    {% if product.variants.size > 1 and color_active == true %}
-
-    {% if condition %}
-
-    {% endif %}
-
-    {%endif%}
+    
 
 
 
@@ -16,7 +9,7 @@
     {% for option in product.options %}
 
     {% if option == 'Color' %}
-    {% assign color_active = false %}
+    {% assign color_active = true %}
 
     {% assign index = forloop.index0 %}
     {% assign colorlist = '' %}
