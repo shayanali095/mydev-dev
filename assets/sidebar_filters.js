@@ -1,1 +1,1 @@
-const 
+const price_range  = document.querySelector('')
