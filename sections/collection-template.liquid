@@ -139,7 +139,7 @@
     {% when 5 %}
     {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
     {% endcase %}
-
+    <div class="main_content">
     <ul class="grid grid--uniform{% if collection.products_count > 0 %} grid--view-items{% endif %}">
       {% for product in collection.products %}
       <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
@@ -222,7 +222,7 @@
       {% endfor %}
     </ul>
     {% endif %}
-    
+
     <div class="sidebar_filters">
       {%- for filter in collection.filters -%}
     
