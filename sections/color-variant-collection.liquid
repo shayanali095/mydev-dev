@@ -12,10 +12,10 @@
 
     {% assign sizeindex = forloop.index0 %}
     {% assign sizelist = '' %}
-    {% assign color = '' %}
+    {% assign p_size = '' %}
 
     {% for variant in product.variants %}
-    {% capture color %}
+    {% capture p_size %}
     {{ variant.options[index] }}
     {% endcapture %}
 
@@ -33,9 +33,9 @@
         </div>
     </a>
     {% capture tempList %}
-    {{colorlist | append: color | append: " " }}
+    {{sizelist | append: color | append: " " }}
     {% endcapture %}
-    {% assign colorlist = tempList %}
+    {% assign sizelist = tempList %}
     {% endunless %}
     {% endfor %}    
     {%endif%}
