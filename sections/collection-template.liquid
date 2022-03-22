@@ -259,11 +259,7 @@
         pattern="[0-9]*"
         step="10"
         min="0"
-        {%- if uses_comma_decimals -%}
-          max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
-        {%- else -%}
-          max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
-        {% endif %}
+        max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
         aria-label="{{ 'collections.price_range.min_label' | t | escape }}" />
     </div>
     <div class="cc-price-range__input-container">
