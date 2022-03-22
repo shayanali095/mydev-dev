@@ -16,7 +16,7 @@
 
     {% for variant in product.variants %}
     {% capture p_size %}
-    {{ variant.options[index] }}
+    {{ variant.options[sizeindex] }}
     {% endcapture %}
 
     {% unless sizelist contains color %}
