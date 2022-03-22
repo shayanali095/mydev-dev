@@ -5,9 +5,11 @@
     {% for option in product.options %}
     
     {%- comment -%} for product which has size variants {%- endcomment -%}
-    {% if product.variants.size > 1 and color_active == true %}
     
     {% if option == 'Size'%}
+    
+    {% if product.variants.size > 1 and color_active == true %}
+
     {% assign sizeindex = forloop.index0 %}
     {% assign colorlist = '' %}
     {% assign color = '' %}
