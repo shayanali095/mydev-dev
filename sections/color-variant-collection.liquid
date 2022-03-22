@@ -4,7 +4,7 @@
         {% for option in product.options %}
             {% if option == 'Color' %}
              {% assign color_active = true %}
-                {% if product.variants %}
+                {% if product.variants.size > 1  %}
                     
                 {% endif %}
             {% endif %}
