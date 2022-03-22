@@ -34,10 +34,10 @@
 
                     {% endfor %}
                 {%else%}
-                <a class="product_card" href="{{variant.url }}">
+                <a class="product_card" href="{{product.url }}">
                     <div>
                         <div class="variant_image">
-                            <img src="{{variant.featured_image | img_url: 'master'}}" alt="variant-title">
+                            <img src="{{product.featured_image | img_url: 'master'}}" alt="product-title">
 
                         </div>
                         <div class="variant_title"><strong>{{product.title}}-{{color}}</strong></div>
