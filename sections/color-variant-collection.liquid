@@ -2,12 +2,13 @@
 <div class="variants">
 {% for product in collection.products %}
 {% assign color_active = false %}
+{% assign size_active = false %}
 {% for option in product.options %}
   {% if option == 'Color' %}
      {% assign color_active = true %}
   {% endif %}
-  {% if condition %}
-      
+  {% if option == 'Size' %}
+{% assign size_active = true %}
   {% endif %}
 {% endfor %}
 {% if product.variants.size > 1 and color_active == true %}
