@@ -229,7 +229,7 @@
         {%- case filter.type -%}
         {%- when "list" -%}
         <div class="filter_type">
-          <span class="filter_type_label">{{ filter.label }}</span> 
+          <span class="filter_type_label">{{ filter.label }}-</span> 
           {%- for value in filter.values -%}
           <label
             class="filter_checkbox_label {% if value.count == 0 and value.active == false %}cc-checkbox--disabled{% endif %}">
