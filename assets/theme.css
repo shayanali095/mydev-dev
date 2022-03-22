@@ -2287,8 +2287,7 @@ hr {
 
 .grid--view-items {
   overflow: auto;
-  margin-bottom: -35px;
-width: 100%; }
+  margin-bottom: -35px; }
 
 .grid-view-item {
   margin: 0 auto 35px; }
