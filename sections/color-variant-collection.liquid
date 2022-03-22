@@ -4,6 +4,7 @@
         {% for option in product.options %}
             {% if option == 'Color' %}
              {% assign color_active = true %}
+             
                 {% if product.variants.size > 1 and color_active == true %}
                     {% assign index = forloop.index0 %}
                     {% assign colorlist = '' %}
