@@ -4,9 +4,10 @@
 {% assign color_active = false %}
 {% for option in product.options %}
   {% if option == 'Color' %}
-     {% assign color_active = true %}
   {% endif %}
 {% endfor %}
+{% assign color_active = true %}
+
 {% if product.variants.size > 1 and color_active == true %}
 {% for option in product.options %}
    {% if option == 'Color' %}
