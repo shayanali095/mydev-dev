@@ -235,23 +235,7 @@
 
 
 {%- for filter in collection.filters -%}
-								{%- liquid
-
-									if section.settings.collapse_filters_method == 'all'
-										assign filter_is_open = false
-									elsif section.settings.collapse_filters_method == 'none'
-										assign filter_is_open = true
-									elsif section.settings.collapse_filters_method contains 'over-'
-										assign limit = section.settings.collapse_filters_method | split: '-' | last | plus: 0
-										if filter.values.size > limit
-											assign filter_is_open = false
-										else
-											assign filter_is_open = true
-										endif
-									endif
-
-									assign filter_title = filter.label | escape
-								-%}
+								
 
 								{%- capture filter_content -%}
 									{%- case filter.type -%}
@@ -275,7 +259,6 @@
 											{%- endfor -%}
 
 										{%- when "price_range" -%}
-											{% render 'price-range', filter: filter %}
 
 									{%- endcase -%}
 								{%- endcapture -%}
