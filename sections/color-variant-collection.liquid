@@ -3,7 +3,7 @@
     {% assign color_active = false %}
     {% for option in product.options %}
     
-    {%- comment -%} for {%- endcomment -%}
+    {%- comment -%} for product which has size variants {%- endcomment -%}
     
     {% if option == 'Size'%}
     {% assign index = forloop.index0 %}
@@ -36,7 +36,7 @@
     {% endfor %}    
     {%endif%}
     
-    
+    {%- comment -%} {%- endcomment -%}
     
     
     {% if option == 'Color' %}
