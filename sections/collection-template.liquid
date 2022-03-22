@@ -139,7 +139,6 @@
     {% when 5 %}
     {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
     {% endcase %}
-    <div class="main_content">
       <ul class="grid grid--uniform{% if collection.products_count > 0 %} grid--view-items{% endif %}">
         {% for product in collection.products %}
         <li class="grid__item grid__item--{{section.id}} {{ grid_item_width }}">
@@ -223,59 +222,6 @@
       </ul>
       {% endif %}
 
-      <div class="sidebar_filters">
-        {%- for filter in collection.filters -%}
-
-        {%- case filter.type -%}
-        {%- when "list" -%}
-        <div class="filter_type">
-          <span class="filter_type_label">{{ filter.label }}-</span>
-          {%- for value in filter.values -%}
-          <label
-            class="filter_checkbox_label {% if value.count == 0 and value.active == false %}cc-checkbox--disabled{% endif %}">
-            <input class="filter_checkbox_input" id="Filter-{{ value.param_name }}-{{ value.value | handle }}"
-              type="checkbox" name="{{ value.param_name }}" value="{{ value.value | escape }}" {% if value.active
-              %}checked{% endif %} {% if value.count==0 and value.active==false %}disabled{% endif %}>
-
-            <span class="filter_checkbox_label">{{ value.label | escape }}</span>
-
-
-            <span class="filter_checkbox_count">{{ value.count }}</span>
-
-          </label>
-          {%- endfor -%}
-        </div>
-        {%- when "price_range" -%}
-        <span class="filter_type_label">{{ filter.label }}-</span>
-        <div class="price_range">
-          <div class="min_imput">
-            <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
-            <input class="filter_range_input" id="CCPriceRangeMin" name="{{ filter.min_value.param_name }}" {%- if
-              filter.min_value.value -%}
-              value="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}" {% endif %}
-              placeholder="0" type="text" inputmode="numeric" pattern="[0-9]*" step="10" min="0"
-              max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
-              aria-label="{{ 'collections.price_range.min_label' | t | escape }}" />
-          </div>
-          <div class="max_input">
-            <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
-            <input class="cc-price-range__input filter_range_input cc-price-range__input--max" id="CCPriceRangeMax"
-              name="{{ filter.max_value.param_name }}" {%- if filter.max_value.value -%}
-              value="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}" {%- endif -%}
-              placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}" type="text"
-              inputmode="numeric" pattern="[0-9]*" step="10" min="0"
-              max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
-              aria-label="{{ 'collections.price_range.max_label' | t | escape }}" />
-          </div>
-        </div>
-        <input type="range" name="" id="filter_price_range" min="{{ filter.range_min | money_without_currency | replace: ',', '' | round }}" max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}">
-        {%- endcase -%}
-
-
-        {%- endfor -%}
-
-      </div>
-    </div>
     {% if is_empty_collection %}
     <div class="grid__item small--text-center">
       <p class="text-center">{{ 'collections.general.no_matches' | t }}</p>
