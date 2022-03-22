@@ -233,6 +233,34 @@
 
 {% endpaginate %}
 
+{%- capture filter_content -%}
+									{%- case filter.type -%}
+										{%- when "list" -%}
+											{%- for value in filter.values -%}
+												<label class="cc-checkbox {% if value.count == 0 and value.active == false %}cc-checkbox--disabled{% endif %}">
+													<input class="cc-checkbox__input"
+																 id="Filter-{{ value.param_name }}-{{ value.value | handle }}"
+																 type="checkbox"
+																 name="{{ value.param_name }}"
+																 value="{{ value.value | escape }}"
+																 {% if value.active %}checked{% endif %}
+														{% if value.count == 0 and value.active == false %}disabled{% endif %}>
+
+													<span class="cc-checkbox__label">{{ value.label | escape }}</span>
+
+													{% if section.settings.show_filter_counts %}
+														<span class="cc-checkbox__count">{{ value.count }}</span>
+													{% endif %}
+												</label>
+											{%- endfor -%}
+
+										{%- when "price_range" -%}
+											{% render 'price-range', filter: filter %}
+
+									{%- endcase -%}
+								{%- endcapture -%}
+
+
 {% for filter in collection.filters %}
   {% for value in filter.values %}
   <div>{{filter.type }}</div>
