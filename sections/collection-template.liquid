@@ -232,9 +232,9 @@
 </div>
 
 {% endpaginate %}
-{% for filter in collection %}
+{% for filter in collection.filters %}
   
-{% endfor %}
+
 {%- capture filter_content -%}
 									{%- case filter.type -%}
 										{%- when "list" -%}
@@ -262,7 +262,7 @@
 									{%- endcase -%}
 								{%- endcapture -%}
 
-
+                {% endfor %}
   
 {% schema %}
 {
