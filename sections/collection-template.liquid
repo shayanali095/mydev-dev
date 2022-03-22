@@ -233,11 +233,9 @@
 
 {% endpaginate %}
 
-
+<div class=""></div>
 {%- for filter in collection.filters -%}
-								
-
-								
+			
 									{%- case filter.type -%}
 										{%- when "list" -%}
 											{%- for value in filter.values -%}
