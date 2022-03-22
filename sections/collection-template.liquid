@@ -229,7 +229,7 @@
         {%- case filter.type -%}
         {%- when "list" -%}
         <div class="filter_type">
-          <span class="filter_type_label">{{ filter.label }}-</span> 
+          <span class="filter_type_label">{{ filter.label }}-</span>
           {%- for value in filter.values -%}
           <label
             class="filter_checkbox_label {% if value.count == 0 and value.active == false %}cc-checkbox--disabled{% endif %}">
@@ -247,52 +247,30 @@
         </div>
         {%- when "price_range" -%}
         <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
-        <input class="filter_range_input"
-        id="CCPriceRangeMin"
-        name="{{ filter.min_value.param_name }}"
-        {%- if filter.min_value.value -%}
-            value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
-        {% endif %}
-        placeholder="0"
-        type="text"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        step="10"
-        min="0"
-        max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
-        aria-label="{{ 'collections.price_range.min_label' | t | escape }}" />
-    </div>
-    <div class="cc-price-range__input-container">
-      <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
-      <input class="cc-price-range__input cc-price-range__input--max"
-        id="CCPriceRangeMax"
-        name="{{ filter.max_value.param_name }}"
-        {%- if filter.max_value.value -%}
-          
-            value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
-          
-        {%- endif -%}
-        
-          placeholder="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
-        
-        type="text"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        step="10"
-        min="0"
-        {%- if uses_comma_decimals -%}
+        <input class="filter_range_input" id="CCPriceRangeMin" name="{{ filter.min_value.param_name }}" {%- if
+          filter.min_value.value -%}
+          value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
+          {% endif %} placeholder="0" type="text" inputmode="numeric" pattern="[0-9]*" step="10" min="0"
           max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
-        {%- else -%}
-          max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
-        {% endif %}
-        aria-label="{{ 'collections.price_range.max_label' | t | escape }}" />
+          aria-label="{{ 'collections.price_range.min_label' | t | escape }}" />
+      </div>
+      <div class="cc-price-range__input-container">
+        <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
+        <input class="cc-price-range__input cc-price-range__input--max" id="CCPriceRangeMax"
+          name="{{ filter.max_value.param_name }}" {%- if filter.max_value.value -%}
+          value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
+          {%- endif -%}
+          placeholder="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
+          type="text" inputmode="numeric" pattern="[0-9]*" step="10" min="0"
+          max="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
+          aria-label="{{ 'collections.price_range.max_label' | t | escape }}" />
 
 
         {%- endcase -%}
 
 
         {%- endfor -%}
-        
+
       </div>
     </div>
     {% if is_empty_collection %}
