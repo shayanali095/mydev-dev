@@ -2,20 +2,7 @@
     {% for product in collection.products %}
     {% if product.variants.size > 1 %}
         
-    {% else %}
-    <a class="product_card" href="{{product.url }}">
-        <div>
-            <div class="variant_image">
-                <img src="{{product.featured_image | img_url: 'master'}}" alt="product-image">
-
-            </div>
-            <div class="variant_title"><strong>{{product.title}}</strong></div>
-
-            <div class="variant_price">{{product.price | money}}</div>
-
-        </div>
-    </a>
-    {% endif %}
+    
         {% assign color_active = false %}
         {% for option in product.options %}
             {% if option == 'Color' %}
@@ -55,5 +42,20 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
+
+        {% else %}
+        <a class="product_card" href="{{product.url }}">
+            <div>
+                <div class="variant_image">
+                    <img src="{{product.featured_image | img_url: 'master'}}" alt="product-image">
+    
+                </div>
+                <div class="variant_title"><strong>{{product.title}}</strong></div>
+    
+                <div class="variant_price">{{product.price | money}}</div>
+    
+            </div>
+        </a>
+        {% endif %}  
     {% endfor %}
 </div>
