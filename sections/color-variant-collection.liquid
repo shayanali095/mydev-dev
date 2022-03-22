@@ -3,6 +3,14 @@
 {% for product in collection.products %}
 {% assign color_active = false %}
 {% assign color_active = true %}
+    
+{% if condition %}
+        
+    {% endif %}
+
+
+
+
 
 {% if product.variants.size > 1 and color_active == true %}
 {% for option in product.options %}
