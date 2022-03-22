@@ -6,6 +6,9 @@
   {% if option == 'Color' %}
      {% assign color_active = true %}
   {% endif %}
+  {% if condition %}
+      
+  {% endif %}
 {% endfor %}
 {% if product.variants.size > 1 and color_active == true %}
 {% for option in product.options %}
