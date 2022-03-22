@@ -249,7 +249,7 @@
         <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
         <input class="filter_range_input" id="CCPriceRangeMin" name="{{ filter.min_value.param_name }}" {%- if
           filter.min_value.value -%}
-          value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
+          value="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
           {% endif %} placeholder="0" type="text" inputmode="numeric" pattern="[0-9]*" step="10" min="0"
           max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
           aria-label="{{ 'collections.price_range.min_label' | t | escape }}" />
