@@ -2,9 +2,6 @@
     {% for product in collection.products %}
     {% assign color_active = false %}
     {% for option in product.options %}
-    {% if option == 'Size'%}
-    hello
-    {%endif%}
     {% if option == 'Color' %}
 
     {% assign color_active = true %}
@@ -24,7 +21,7 @@
 
     {% unless colorlist contains color %}
     <a class="product_card" href="{{variant.url }}">
-         <div>
+        ` <div>
             <div class="variant_image">
                 <img src="{{variant.featured_image | img_url: 'master'}}" alt="variant-title">
 
