@@ -1,6 +1,10 @@
 <div class="variants">
     {% for product in collection.products %}
-    
+    {% if condition %}
+        
+    {% else %}
+        
+    {% endif %}
         {% assign color_active = false %}
         {% for option in product.options %}
             {% if option == 'Color' %}
