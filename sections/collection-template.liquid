@@ -257,9 +257,9 @@
         <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
         <input class="cc-price-range__input cc-price-range__input--max" id="CCPriceRangeMax"
           name="{{ filter.max_value.param_name }}" {%- if filter.max_value.value -%}
-          value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
+          value="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
           {%- endif -%}
-          placeholder="{{ filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.' | round }}"
+          placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
           type="text" inputmode="numeric" pattern="[0-9]*" step="10" min="0"
           max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
           aria-label="{{ 'collections.price_range.max_label' | t | escape }}" />
