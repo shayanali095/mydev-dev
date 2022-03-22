@@ -246,7 +246,7 @@
           {%- endfor -%}
         </div>
         {%- when "price_range" -%}
-        
+        <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
         <input class="filter_range_input"
         id="CCPriceRangeMin"
         name="{{ filter.min_value.param_name }}"
