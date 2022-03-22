@@ -261,14 +261,6 @@
 								{%- endcapture -%}
 
 
-{% for filter in collection.filters %}
-  {% for value in filter.values %}
-  <div>{{filter.type }}</div>
-  {{value.label }}  
-  
-  {% endfor %}
-  
-{% endfor %}
   
 {% schema %}
 {
