@@ -8,7 +8,7 @@
     
     {% if option == 'Size'%}
     {% assign size_active = true %}
-    {% if product.variants.size > 1 and color_active == true %}
+    {% if product.variants.size > 1 and size_active == true %}
 
     {% assign sizeindex = forloop.index0 %}
     {% assign sizelist = '' %}
