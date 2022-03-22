@@ -33,7 +33,7 @@
         </div>
     </a>
     {% capture tempList %}
-    {{sizelist | append: color | append: " " }}
+    {{sizelist | append: p_size | append: " " }}
     {% endcapture %}
     {% assign sizelist = tempList %}
     {% endunless %}
