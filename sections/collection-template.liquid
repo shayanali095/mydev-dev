@@ -256,7 +256,7 @@
           aria-label="{{ 'collections.price_range.min_label' | t | escape }}" />
       
         <span class="cc-price-range__input-currency-symbol">{{ cart.currency.symbol }}</span>
-        <input class="cc-price-range__input cc-price-range__input--max" id="CCPriceRangeMax"
+        <input class="cc-price-range__input filter_range_input cc-price-range__input--max" id="CCPriceRangeMax"
           name="{{ filter.max_value.param_name }}" {%- if filter.max_value.value -%}
           value="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}"
           {%- endif -%}
