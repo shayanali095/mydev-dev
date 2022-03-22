@@ -1,48 +1,10 @@
 <div class="variants">
     {% for product in collection.products %}
     {% assign color_active = false %}
-    {% assign size_active = false %}
     {% for option in product.options %}
-    
-    {%- comment -%} for product which has size variants {%- endcomment -%}
-    
     {% if option == 'Size'%}
-    {% assign size_active = true %}
-    {% if product.variants.size > 1 and size_active == true %}
-
-    {% assign sizeindex = forloop.index0 %}
-    {% assign sizelist = '' %}
-    {% assign p_size = '' %}
-    {% for variant in product.variants %}
-    {% capture p_size %}
-    {{ variant.options[sizeindex] }}
-    {% endcapture %}
-
-    {% unless sizelist contains p_size %}
-    <a class="product_card" href="{{variant.url }}">
-         <div>
-            <div class="variant_image">
-                <img src="{{variant.featured_image | img_url: 'master'}}" alt="variant-title">
-
-            </div>
-            <div class="variant_title"><strong>{{product.title}}-{{p_size}}</strong></div>
-
-            <div class="variant_price">{{variant.price | money}}</div>
-
-        </div>
-    </a>
-    {% capture tempList %}
-    {{sizelist | append: p_size | append: " " }}
-    {% endcapture %}
-    {% assign sizelist = tempList %}
-    {% endunless %}
-    {% endfor %}    
+    hello
     {%endif%}
-    {%endif%}
-
-    {%- comment -%} for product which has color variants{%- endcomment -%}
-    
-    
     {% if option == 'Color' %}
 
     {% assign color_active = true %}
