@@ -1,5 +1,4 @@
 
-  <script>
   // Put your application javascript here
 /////////////////////////
 ////////////////////////////Load more functionality/////////////
@@ -36,4 +35,3 @@ $('.js-load-more').on('click', function(){
   }
   })
  });
-</script>
