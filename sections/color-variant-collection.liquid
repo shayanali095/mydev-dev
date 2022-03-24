@@ -72,9 +72,9 @@
         </a>
         {% endif %}  
     {% endfor %}
-</div>
 
-{% if paginate.pages > 1 %}
+    
+    {% if paginate.pages > 1 %}
 <div class="pagination">
   <input type="hidden" value="{{ paginate.next.url }}" data-next-link>
   <input type="hidden" value="{{ paginate.pages }}" data-all-pages>
@@ -93,3 +93,6 @@
 
 
 {% endpaginate %}
+</div>
+
+
