@@ -1,3 +1,4 @@
+{% paginate collection by 4 %}
 
 <div class="variants">
     {% for product in collection.products %}
@@ -72,3 +73,9 @@
         {% endif %}  
     {% endfor %}
 </div>
+
+{%- if paginate.pages > 1 -%}
+{% include 'pagination', paginate: paginate %}
+{%- endif -%}
+
+{% endpaginate %}
