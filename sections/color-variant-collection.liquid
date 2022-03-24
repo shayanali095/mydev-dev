@@ -1,7 +1,7 @@
+{% paginate collection.products by 5 %}
 
 
 <div class="variants">
-    {% paginate collection.products by 5 %}
     {% for product in collection.products %}
     {% if product.variants.size > 1 %}
         
@@ -93,7 +93,7 @@
 {% endif %}
 
 
-{% endpaginate %}
 </div>
 
 
+{% endpaginate %}
