@@ -72,28 +72,7 @@
             </div>
         </a>
         {% endif %}  
-        {% if paginate.pages > 1 %}
-<div class="pagination">
-  <input type="hidden" value="{{ paginate.next.url }}" data-next-link>
-  <input type="hidden" value="{{ paginate.pages }}" data-all-pages>
-  <input type="hidden" value="{{ paginate.current_page }}" data-this-page>
-  <input type="hidden" value="{{ collection.url }}" data-coll-url>
-  <div class="load-more_wrap">
-    <button class="btn js-load-more">
-      <span load-more-text>Load more</span>
-      <span class="loadMoreHide" loader>
-        <img src="{{ 'loader.gif' | asset_url }}" />
-      </span>
-    </button>
-  </div>
-</div>
-{% endif %}
     {% endfor %}
-
-
-    
-
-
 </div>
 
 
