@@ -1,6 +1,7 @@
-{% paginate collection.products by 4 %}
+
 
 <div class="variants">
+    {% paginate collection.products by 4 %}
     {% for product in collection.products %}
     {% if product.variants.size > 1 %}
         
@@ -73,7 +74,7 @@
         {% endif %}  
     {% endfor %}
 
-    
+
     {% if paginate.pages > 1 %}
 <div class="pagination">
   <input type="hidden" value="{{ paginate.next.url }}" data-next-link>
