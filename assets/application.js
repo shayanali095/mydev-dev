@@ -23,7 +23,7 @@ $('.js-load-more').on('click', function(){
   success: function(responseHTML){
   $('[data-next-link]').val(datacollurl + "?page="+next_coll);
   $('[data-this-page]').val(current_page_new);
-  $('.catalog').append($(responseHTML).find('.catalog').html());
+  $('.variants').append($(responseHTML).find('.variants').html());
   },
   complete: function() {
   if(current_page_new < totalPages) {
