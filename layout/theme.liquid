@@ -14,13 +14,9 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
     <script> // RELOADS WEBPAGE WHEN MOBILE ORIENTATION CHANGES  
-        $(window).on('orientationchange', function(e) {
-            $.mobile.changePage(window.location.href, {
-                allowSamePageTransition: true,
-                transition: 'none',
-                reloadPage: true
-            });
-        });
+$(window).bind('orientationchange', function (event) {
+location.reload(true);
+});
       </script>
   {%- assign header_font = settings.type_header_font -%}
   {%- assign base_font = settings.type_base_font -%}
