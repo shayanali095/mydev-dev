@@ -9118,5 +9118,5 @@ hr {
 }
 
 .catalog_collection .grid-view-item.product-card {
-  width: fit-content;
+  width: inherit;
 }
