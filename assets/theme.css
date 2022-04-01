@@ -6998,3 +6998,7 @@ hr {
   margin-bottom: 0; }
 
 
+c.grid-view-item.product-card {
+	width: fit-content;
+}
+
