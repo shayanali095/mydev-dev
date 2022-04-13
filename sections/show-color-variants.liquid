@@ -141,7 +141,6 @@
     {% endcase %}
     <ul class="grid grid--uniform{% if collection.products_count > 0 %} grid--view-items{% endif %}">
       {% for product in collection.products %}
-      <li class="catalog_collection grid__item grid__item--{{section.id}} {{ grid_item_width }}">
         {% if product.variants.size > 1 %}
         
     
@@ -160,6 +159,8 @@
                         {% endcapture %}
 
                         {% unless colorlist contains color %}
+              <li class="catalog_collection grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+
                         <a class="product_card color_list" href="{{variant.url }}">
                             <div>
                                 <div class="variant_image">
@@ -172,6 +173,7 @@
 
                             </div>
                         </a>
+      </li>
                         {% capture tempList %}
                         {{colorlist | append: color | append: " " }}
                         {% endcapture %}
@@ -180,6 +182,8 @@
 
                     {% endfor %}
                     {% else %}
+            <li class="catalog_collection grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+
                     <a class="product_card" href="{{product.url }}">
                         <div>
                             <div class="variant_image">
@@ -192,12 +196,14 @@
                 
                         </div>
                     </a>
-              
+              </li>
                 {% endif %}
             {% endif %}
         {% endfor %}
 
         {% else %}
+            <li class="catalog_collection grid__item grid__item--{{section.id}} {{ grid_item_width }}">
+
         <a class="product_card" href="{{product.url }}">
             <div>
                 <div class="variant_image">
@@ -210,8 +216,8 @@
     
             </div>
         </a>
+              </li>
         {% endif %}  
-      </li>
       {% else %}
       {% comment %}
       Add default products to help with onboarding for collections/all only.
