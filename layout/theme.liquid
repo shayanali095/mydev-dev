@@ -26,6 +26,7 @@
   {%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
 
   <link rel="preload" href="{{ 'theme.css' | asset_url }}" as="style">
+  <link rel="preload" href="{{ 'index.css' | asset_url }}" as="style">
 
   {{ 'color-variant-collection.css' | asset_url | stylesheet_tag }}
   {{ 'application.css' | asset_url | stylesheet_tag }}
@@ -70,10 +71,6 @@
 
   {% include 'social-meta-tags' %}
   {% include 'css-variables' %}
-
-  <style>
-    
-  </style>
 
   <script>
     window.performance.mark('debut:theme_stylesheet_loaded.start');
