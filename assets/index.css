@@ -1,0 +1,35 @@
+{
+        {
+        header_font | font_face: font_display: 'swap'
+      }
+    }
+
+      {
+        {
+        base_font | font_face: font_display: 'swap'
+      }
+    }
+
+      {
+        {
+        base_font_bold | font_face: font_display: 'swap'
+      }
+    }
+
+      {
+        {
+        base_font_bolder | font_face: font_display: 'swap'
+      }
+    }
+
+      {
+        {
+        base_font_italic | font_face: font_display: 'swap'
+      }
+    }
+
+      {
+        {
+        base_font_bold_italic | font_face: font_display: 'swap'
+      }
+    }
