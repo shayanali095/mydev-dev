@@ -1,11 +1,25 @@
 
-<h2> Product</h2>
 
 {% schema %}
   {
     "name": "Template",
     "settings": [
-      
+     {
+  "type": "image_picker",
+  "id": "hero_background",
+  "label": "Hero Background Image"
+},
+{
+  "type": "video",
+  "id": "hero_video",
+  "label": "Hero Background Video"
+},
+{
+  "type": "url",
+  "id": "hero_video_url",
+  "label": "Hero Video (YouTube or Vimeo)"
+}
+
     ]
   }
 {% endschema %}
