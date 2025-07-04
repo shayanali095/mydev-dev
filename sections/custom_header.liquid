@@ -49,10 +49,18 @@
       "options": [
         { "value": "left", "label": "Left" },
         { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" },
+        { "value": "right", "label": "Right" }
       ],
       "default": "center"
     },
+
+    {
+      "type": "checkbox",
+      "id": "show_logo_settings",
+      "label": "Show Logo Settings",
+      "default": true
+    },
+
     {
       "type": "range",
       "id": "logo_padding_top",
@@ -89,10 +97,7 @@
       "step": 5,
       "default": 10
     },
-    {
-      "type": "header",
-      "content": " Logo"
-    },
+
     {
       "type": "image_picker",
       "id": "logo",
@@ -108,17 +113,11 @@
       "default": 200
     },
     {
-      "type": "header" ,
-    "content": "Visibility" 
-    },
-    {
-  "type": "checkbox",
-  "id": "show_logo",
-  "label": "Hide logo on home page",
-  "default": true
-}
-
-    
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Hide logo on home page",
+      "default": true
+    }
   ],
   "presets": [
     {
@@ -126,4 +125,5 @@
     }
   ]
 }
+
 {% endschema %}
