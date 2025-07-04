@@ -6,13 +6,15 @@
   padding-left: {{ section.settings.logo_padding_left }}px;
 ">
   {% if section.settings.logo != blank %}
-    <img 
-      src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
-      alt="Logo" 
-      style="max-width: 100%; height: auto;"
-    >
+    <span>
+      <img 
+        src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+        alt="Logo" 
+        style="max-width: 100%; height: auto;"
+      >
+    </span>
   {% else %}
-    {{ shop.name }}
+    <span>{{ shop.name }}</span>
   {% endif %}
 </h1>
 
@@ -34,7 +36,6 @@
         { "value": "left", "label": "Left" },
         { "value": "center", "label": "Center" },
         { "value": "right", "label": "Right" },
-        { "value": "bottom", "label": "Bottom" },
       ],
       "default": "center"
     },
