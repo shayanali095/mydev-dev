@@ -7,7 +7,18 @@
   font-size: {{ section.settings.menu_font }}px;
 ">
 
-
+  <!-- Toggle button -->
+  <span style="{% unless section.settings.show_logo %}display: none;{% endunless %}">
+    {% if section.settings.logo != blank %}
+      <img 
+        src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+        alt="Logo" 
+        style="width: {{ section.settings.logo_width }}px; max-width: 100%; height: auto;"
+      >
+    {% else %}
+      {{ shop.name }}
+    {% endif %}
+  </span>
 </h1>
 
 <!-- Home Logo -->
