@@ -34,6 +34,21 @@
     >
   </span>
 
+<!-- Main Menu -->
+{% if section.settings.main_menu != blank %}
+  <nav class="main-menu">
+    <ul>
+      {% for link in linklists[section.settings.main_menu].links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+
+  
+{% endif %}
 
   
 {% endif %}
