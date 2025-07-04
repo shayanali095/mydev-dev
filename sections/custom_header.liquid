@@ -6,7 +6,17 @@
   padding-left: {{ section.settings.logo_padding_left }}px;
 ">
 </h1>
- 
+  {% if section.settings.logo != blank %}
+    <span>
+      <img 
+        src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+        alt="Logo" 
+        style="max-width: 100%; height: auto;"
+      >
+    </span>
+  {% else %}
+    <span>{{ shop.name }}</span>
+  {% endif %}
 
 {% schema %}
 {
@@ -69,7 +79,20 @@
       "type": "header",
       "content": "🖼️ Logo"
     },
-    
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Upload Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo Width (px)",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "default": 200
+    }
   ],
   "presets": [
     {
