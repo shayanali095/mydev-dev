@@ -5,18 +5,21 @@
   padding-bottom: {{ section.settings.logo_padding_bottom }}px;
   padding-left: {{ section.settings.logo_padding_left }}px;
 ">
-  {% if section.settings.show_logo and section.settings.logo != blank %}
-    <span>
+  <span style="{% unless section.settings.show_logo %}display: none;{% endunless %}">
+    {% if section.settings.logo != blank %}
       <img 
         src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
         alt="Logo" 
         style="max-width: 100%; height: auto;"
       >
-    </span>
-  {% else %}
-    <span>{{ shop.name }}</span>
-  {% endif %}
+    {% else %}
+      {{ shop.name }}
+    {% endif %}
+  </span>
 </h1>
+
+
+
 
   {% if section.settings.logo != blank %}
     <span>
@@ -27,7 +30,6 @@
       >
     </span>
   {% else %}
-    <!-- <span>{{ shop.name }}</span> -->
   {% endif %}
 
 {% schema %}
