@@ -1,4 +1,10 @@
-<h1 style="text-align: {{ section.settings.logo_position }};">
+<h1 style="
+  text-align: {{ section.settings.logo_position }};
+  padding-top: {{ section.settings.logo_padding_top }}px;
+  padding-right: {{ section.settings.logo_padding_right }}px;
+  padding-bottom: {{ section.settings.logo_padding_bottom }}px;
+  padding-left: {{ section.settings.logo_padding_left }}px;
+">
   {% if section.settings.logo != blank %}
     <img 
       src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
@@ -27,9 +33,46 @@
       "options": [
         { "value": "left", "label": "Left" },
         { "value": "center", "label": "Center" },
-        { "value": "right", "label": "Right" }
+        { "value": "right", "label": "Right" },
+        { "value": "bottom", "label": "Bottom" },
       ],
       "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_top",
+      "label": "Logo Padding Top (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_right",
+      "label": "Logo Padding Right (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_bottom",
+      "label": "Logo Padding Bottom (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_left",
+      "label": "Logo Padding Left (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
     },
     {
       "type": "header",
