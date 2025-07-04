@@ -6,41 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{ content_for_header }}
-
-    <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
-      header {
-        background-color: #0d1117;
-        color: #ffffff;
-        padding: 20px;
-        text-align: center;
-      }
-      .logo {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: #22c55e; /* Dollar green */
-      }
-      footer {
-        background-color: #0d1117;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
-        font-size: 14px;
-      }
-    </style>
   </head>
   <body>
 
     <header>
-      <div class="logo">$ {{ shop.name }}</div>
+      <h1>{{ shop.name }}</h1>
       <nav>
         {% for link in linklists.main-menu.links %}
-          <a href="{{ link.url }}" style="color: #ffffff; margin: 0 10px;">{{ link.title }}</a>
+          <a href="{{ link.url }}">{{ link.title }}</a>
         {% endfor %}
       </nav>
     </header>
@@ -50,7 +23,7 @@
     </main>
 
     <footer>
-      &copy; {{ 'now' | date: '%Y' }} {{ shop.name }} — Powered by Shopify
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
     </footer>
 
   </body>
