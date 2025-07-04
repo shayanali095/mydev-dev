@@ -1,33 +1,47 @@
-<h1>
-  {% if section.settings.logo != blank %}
-    <img 
-      src="{{ section.settings.logo | image_url: width: 200 }}" 
-      alt="Logo" 
-      style="max-width: 100%; height: auto;"
-    >
-  {% else %}
-    {{ shop.name }}
-  {% endif %}
-</h1>
+<header class="site-header" style="text-align: center; padding: 20px;">
+  <h1>
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% if block.settings.logo != blank %}
+          <img 
+            src="{{ block.settings.logo | image_url: width: 200 }}" 
+            alt="Logo"
+            style="max-width: 100%; height: auto;"
+          >
+        {% else %}
+          {{ shop.name }}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </h1>
+</header>
 
 {% schema %}
 {
- 
   "name": "Header",
-  "tag": "header",
-  "class": "header-section",
-  "settings": [
-     {
-      "type": "header",
-      "content": "Header"
-    },
+  "blocks": [
     {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Upload your logo"
+      "type": "logo_block",
+      "name": "Logo Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Upload your logo"
+        }
+      ]
     }
   ],
-  "presets": [ ]
+  "max_blocks": 1,
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        {
+          "type": "logo_block"
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
-
