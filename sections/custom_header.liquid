@@ -1,58 +1,54 @@
-<h1 style="
-  text-align: {{ section.settings.logo_position }};
-  padding-top: {{ section.settings.logo_padding_top }}px;
-  padding-right: {{ section.settings.logo_padding_right }}px;
-  padding-bottom: {{ section.settings.logo_padding_bottom }}px;
-  padding-left: {{ section.settings.logo_padding_left }}px;
-  font-size: {{ section.settings.menu_font }}px;
-">
-  {% unless section.settings.show_logo %}
-    {% if section.settings.logo != blank %}
-      <img 
-        src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
-        alt="{{ section.settings.logo.alt | default: shop.name }}" 
-        style="width: {{ section.settings.logo_width }}px !important; max-width: 100%; height: auto;"
-        loading="lazy"
-        width="{{ section.settings.logo_width }}"
-      >
-    {% else %}
-      {{ shop.name }}
-    {% endif %}
-  {% endunless %}
-</h1>
+<div class="header-wrapper" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 30px; padding: 10px 20px;">
+  <!-- Logo Section -->
 
-
-<!-- Home Logo - This duplicate section should probably be removed -->
-{% if section.settings.logo != blank %}
-  <span>
-    <img 
-      src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
-      alt="{{ section.settings.logo.alt | default: shop.name }}" 
-      style="width: {{ section.settings.logo_width }}px; max-width: 100%; height: auto;"
-      loading="lazy"
-      width="{{ section.settings.logo_width }}"
-    >
-  </span>
-
-<!-- Main Menu -->
-{% if section.settings.main_menu != blank %}
-  <nav class="main-menu" style="display" : flex>
-    <ul>
-      {% for link in linklists[section.settings.main_menu].links %}
-        <li>
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  </nav>
 
 
   
-{% endif %}
+  <div class="header-logo" style="text-align: {{ section.settings.logo_position }};">
+    {% unless section.settings.show_logo %}
+      {% if section.settings.logo != blank %}
+        <img 
+          src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+          alt="{{ section.settings.logo.alt | default: shop.name }}" 
+          style="
+            width: {{ section.settings.logo_width }}px !important;
+            max-width: 100%;
+            height: auto;
+            padding-top: {{ section.settings.logo_padding_top }}px;
+            padding-right: {{ section.settings.logo_padding_right }}px;
+            padding-bottom: {{ section.settings.logo_padding_bottom }}px;
+            padding-left: {{ section.settings.logo_padding_left }}px;
+          "
+          loading="lazy"
+          width="{{ section.settings.logo_width }}"
+        >
+      {% else %}
+        <h1 style="font-size: {{ section.settings.menu_font }}px;">
+          {{ shop.name }}
+        </h1>
+      {% endif %}
+    {% endunless %}
+  </div>
+
+
+
 
   
-{% endif %}
-
+  <!-- Main Menu -->
+  {% if section.settings.main_menu != blank %}
+    <nav class="main-menu">
+      <ul style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
+        {% for link in linklists[section.settings.main_menu].links %}
+          <li>
+            <a href="{{ link.url }}" style="text-decoration: none; font-size: {{ section.settings.menu_font }}px; color: #000;">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+</div>
 
 {% schema %}
 {
@@ -137,11 +133,19 @@
       "label": "Hide logo on home page",
       "default": true
     },
-  
     {
       "type": "link_list",
       "id": "main_menu",
       "label": "Main Menu"
+    },
+    {
+      "type": "range",
+      "id": "menu_font",
+      "label": "Menu Font Size (px)",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "default": 16
     }
   ],
   "presets": [
