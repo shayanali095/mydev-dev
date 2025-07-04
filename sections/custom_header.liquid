@@ -5,7 +5,19 @@
   padding-bottom: {{ section.settings.logo_padding_bottom }}px;
   padding-left: {{ section.settings.logo_padding_left }}px;
 ">
+  {% if section.settings.show_logo and section.settings.logo != blank %}
+    <span>
+      <img 
+        src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+        alt="Logo" 
+        style="max-width: 100%; height: auto;"
+      >
+    </span>
+  {% else %}
+    <span>{{ shop.name }}</span>
+  {% endif %}
 </h1>
+
   {% if section.settings.logo != blank %}
     <span>
       <img 
@@ -96,7 +108,14 @@
     {
       "type": "header" ,
     "content": "Visibility" 
-    }
+    },
+    {
+  "type": "checkbox",
+  "id": "show_logo",
+  "label": "Show Logo",
+  "default": true
+}
+
     
   ],
   "presets": [
