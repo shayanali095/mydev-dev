@@ -1,48 +1,36 @@
-<div class="header-wrapper"
-  style="
-    display: flex;
-    justify-content: {% case section.settings.logo_position %}
-                      {% when 'left' %}flex-start;
-                      {% when 'center' %}center;
-                      {% when 'right' %}flex-end;
-                      {% else %}center;
-                    {% endcase %}
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 10px 20px;
-  "
->
-  <!-- Logo as span -->
-  {% unless section.settings.show_logo %}
-    {% if section.settings.logo != blank %}
-      <span class="header-logo"
-        style="
-          display: inline-block;
-          padding-top: {{ section.settings.logo_padding_top }}px;
-          padding-right: {{ section.settings.logo_padding_right }}px;
-          padding-bottom: {{ section.settings.logo_padding_bottom }}px;
-          padding-left: {{ section.settings.logo_padding_left }}px;
-        "
-      >
-        <img 
-          src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
-          alt="{{ section.settings.logo.alt | default: shop.name }}" 
-          style="width: {{ section.settings.logo_width }}px !important; max-width: 100%; height: auto;"
-          loading="lazy"
-          width="{{ section.settings.logo_width }}"
+<div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 10px 20px;">
+  <!-- Logo wrapper that aligns the logo based on setting -->
+  <div style="flex: 1; text-align: {{ section.settings.logo_position }};">
+    {% unless section.settings.show_logo %}
+      {% if section.settings.logo != blank %}
+        <span
+          style="
+            display: inline-block;
+            padding-top: {{ section.settings.logo_padding_top }}px;
+            padding-right: {{ section.settings.logo_padding_right }}px;
+            padding-bottom: {{ section.settings.logo_padding_bottom }}px;
+            padding-left: {{ section.settings.logo_padding_left }}px;
+          "
         >
-      </span>
-    {% else %}
-      <span style="font-size: {{ section.settings.menu_font }}px;">
-        {{ shop.name }}
-      </span>
-    {% endif %}
-  {% endunless %}
+          <img 
+            src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+            alt="{{ section.settings.logo.alt | default: shop.name }}" 
+            style="width: {{ section.settings.logo_width }}px !important; max-width: 100%; height: auto;"
+            loading="lazy"
+            width="{{ section.settings.logo_width }}"
+          >
+        </span>
+      {% else %}
+        <span style="font-size: {{ section.settings.menu_font }}px;">
+          {{ shop.name }}
+        </span>
+      {% endif %}
+    {% endunless %}
+  </div>
 
-  <!-- Main Menu -->
+  <!-- Menu always on right -->
   {% if section.settings.main_menu != blank %}
-    <nav class="main-menu" style="margin-left: auto;">
+    <nav class="main-menu" style="flex-shrink: 0;">
       <ul style="list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;">
         {% for link in linklists[section.settings.main_menu].links %}
           <li>
@@ -55,6 +43,9 @@
     </nav>
   {% endif %}
 </div>
+
+
+
 
 {% schema %}
 {
