@@ -32,6 +32,22 @@
   {% else %}
   {% endif %}
 
+
+  {% if section.settings.main_menu != blank %}
+  <nav>
+    <ul style="list-style: none; display: flex; gap: 20px; padding: 0; margin: 0;">
+      {% for link in linklists[section.settings.main_menu].links %}
+        <li>
+          <a href="{{ link.url }}" style="text-decoration: none; color: black;">
+            {{ link.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+
 {% schema %}
 {
   "name": "Header",
@@ -118,6 +134,12 @@
       "label": "Hide logo on home page",
       "default": true
     },
+    {
+  "type": "link_list",
+  "id": "main_menu",
+  "label": "Main Menu"
+}
+
     
   ],
 
