@@ -1,4 +1,4 @@
-<h1>
+<h1 style="text-align: {{ section.settings.logo_position }};">
   {% if section.settings.logo != blank %}
     <img 
       src="{{ section.settings.logo | image_url: width: 200 }}" 
@@ -12,12 +12,11 @@
 
 {% schema %}
 {
- 
   "name": "Header",
   "tag": "header",
   "class": "header-section",
   "settings": [
-     {
+    {
       "type": "header",
       "content": "Header"
     },
@@ -25,10 +24,28 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Upload your logo"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
     }
   ],
-  
-  "presets": [ ]
+  "presets": []
 }
 {% endschema %}
-
