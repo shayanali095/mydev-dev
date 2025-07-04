@@ -162,17 +162,17 @@
       "custom_header": {
         "type": "custom_header",
         "settings": {
-          "logo_position": "left",
+          "logo_position": "right",
           "show_logo_settings": true,
-          "logo_padding_top": 45,
-          "logo_padding_right": 100,
-          "logo_padding_bottom": 50,
-          "logo_padding_left": 45,
+          "logo_padding_top": 5,
+          "logo_padding_right": 0,
+          "logo_padding_bottom": 0,
+          "logo_padding_left": 0,
           "logo": "shopify://shop_images/DERMATEST_Siegel_DermatestGarantie_202101_DE_CMYK_2525201_1.png",
-          "logo_width": 260,
-          "show_logo": true,
+          "logo_width": 140,
+          "show_logo": false,
           "main_menu": "home",
-          "menu_font": 21
+          "menu_font": 22
         }
       }
     },
