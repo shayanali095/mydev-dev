@@ -11,20 +11,13 @@
 
     <header>
       <h1>{{ shop.name }}</h1>
-      <nav>
-        {% for link in linklists.main-menu.links %}
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        {% endfor %}
-      </nav>
+     
     </header>
 
     <main>
       {{ content_for_layout }}
     </main>
 
-    <footer>
-      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
-    </footer>
-
+   
   </body>
 </html>
