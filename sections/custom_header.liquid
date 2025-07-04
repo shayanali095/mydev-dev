@@ -1,25 +1,28 @@
-<h1 style="
-  text-align: {{ section.settings.logo_position }};
-  padding-top: {{ section.settings.logo_padding_top }}px;
-  padding-right: {{ section.settings.logo_padding_right }}px;
-  padding-bottom: {{ section.settings.logo_padding_bottom }}px;
-  padding-left: {{ section.settings.logo_padding_left }}px;
-  font-size: {{ section.settings.menu_font }}px;
-">
-
-  <!-- Toggle button -->
-  <span style="{% unless section.settings.show_logo %}display: none;{% endunless %}">
-    {% if section.settings.logo != blank %}
-      <img 
-        src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
-        alt="Logo" 
-        style="width: {{ section.settings.logo_width }}px; max-width: 100%; height: auto;"
-      >
-    {% else %}
-      {{ shop.name }}
-    {% endif %}
-  </span>
+<h1
+  style="
+    text-align: {{ section.settings.logo_position }};
+    padding-top: {{ section.settings.logo_padding_top }}px;
+    padding-right: {{ section.settings.logo_padding_right }}px;
+    padding-bottom: {{ section.settings.logo_padding_bottom }}px;
+    padding-left: {{ section.settings.logo_padding_left }}px;
+    font-size: {{ section.settings.menu_font }}px;
+  "
+>
+  {% if section.settings.logo != blank %}
+    {% unless section.settings.show_logo and template.name == 'index' %}
+      <span>
+        <img 
+          src="{{ section.settings.logo | image_url: width: section.settings.logo_width }}" 
+          alt="Logo" 
+          style="width: {{ section.settings.logo_width }}px; max-width: 100%; height: auto;"
+        >
+      </span>
+    {% endunless %}
+  {% else %}
+    <span>{{ shop.name }}</span>
+  {% endif %}
 </h1>
+
 
 <!-- Home Logo -->
 {% if section.settings.logo != blank %}
