@@ -36,7 +36,7 @@
 
 <!-- Main Menu -->
 {% if section.settings.main_menu != blank %}
-  <nav class="main-menu">
+  <nav class="main-menu" style="display" : flex>
     <ul>
       {% for link in linklists[section.settings.main_menu].links %}
         <li>
