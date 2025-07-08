@@ -188,12 +188,16 @@
       },
       "custom_product": {
         "type": "custom_product",
-        "settings": {}
+        "settings": {
+          "collection": ""
+        }
       },
       "custom_product_3jaB7F": {
         "type": "custom_product",
         "name": "Product List",
-        "settings": {}
+        "settings": {
+          "collection": "show-color-variations"
+        }
       }
     },
     "content_for_index": [
