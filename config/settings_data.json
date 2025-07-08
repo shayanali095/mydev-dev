@@ -71,7 +71,12 @@
           "text_color": "#ffffff",
           "button_color": "#000000",
           "button_text_color": "#ffffff",
-          "hero_height": 310
+          "hero_height": 310,
+          "text_alignment": "center",
+          "title_font": 35,
+          "subtitle_font": 14,
+          "padding_top": 20,
+          "padding_bottom": 20
         }
       },
       "quotes": {
@@ -180,10 +185,20 @@
           "menu_font": 16,
           "menu_position": "right"
         }
+      },
+      "custom_product": {
+        "type": "custom_product",
+        "settings": {}
+      },
+      "custom_product_3jaB7F": {
+        "type": "custom_product",
+        "name": "Product List",
+        "settings": {}
       }
     },
     "content_for_index": [
-      "hero-2"
+      "hero-2",
+      "custom_product_3jaB7F"
     ]
   },
   "presets": {
