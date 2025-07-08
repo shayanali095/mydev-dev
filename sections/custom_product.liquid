@@ -160,7 +160,7 @@
             <div class="product-card editorial-style">
               <a href="{{ product.url }}" aria-label="{{ product.title }}">
                 {% if product %}
-                  <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
+                  <img src="{{ product | image_url: width: 800 }}" alt="{{ product.title }}">
                 {% else %}
                   <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
                 {% endif %}
