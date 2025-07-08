@@ -10,27 +10,14 @@
   }
 
   .product-display.layout-grid {
-    display: grid;
-    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
-    gap: {{ section.settings.vertical_gap }}px {{ section.settings.horizontal_gap }}px;
-  }
-
-  @media (max-width: 768px) {
-    .product-display.layout-grid {
-      grid-template-columns: repeat({{ section.settings.mobile_columns }}, 1fr);
-    }
-
-    .product-card.editorial-style {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .product-card.editorial-style img {
-      width: 100%;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
   }
 
   .product-card.grid-style {
+    width: 240px;
     text-align: center;
     border: 1px solid #eee;
     padding: 15px;
@@ -91,90 +78,36 @@
     margin-bottom: 8px;
     line-height: 1.5;
   }
-
-  .collection-products.full-width {
-    max-width: 100%;
-  }
-
-  .collection-products.page-width {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* Carousel styling (for mobile if enabled) */
-  .carousel-wrapper {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 20px;
-  }
-
-  .carousel-slide {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    width: calc(100% / {{ section.settings.mobile_columns | default: 1 }});
-  }
 </style>
 
 {% if section.settings.collection != blank %}
-  {% assign current_collection = collections[section.settings.collection] %}
-  <div class="collection-products {% if section.settings.width == 'full' %}full-width{% else %}page-width{% endif %}">
-    <h2>{{ current_collection.title }}</h2>
+  <div class="collection-products">
+    <h2>{{ section.settings.collection.title }}</h2>
 
-    {% assign limited_products = current_collection.products | slice: 0, section.settings.product_count %}
-
-    {% if section.settings.carousel_mobile and section.settings.display_type == 'grid' %}
-      <div class="carousel-wrapper">
-        {% for product in limited_products %}
-          <div class="product-card grid-style carousel-slide">
-            <a href="{{ product.url }}" aria-label="{{ product.title }}">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
-              {% else %}
-                <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
-              {% endif %}
+    <div class="product-display layout-{{ section.settings.display_type }}">
+      {% for product in section.settings.collection.products %}
+        {% if section.settings.display_type == 'grid' %}
+          <div class="product-card grid-style">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </a>
           </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="product-display layout-{{ section.settings.display_type }}">
-        {% for product in limited_products %}
-          {% if section.settings.display_type == 'grid' %}
-            <div class="product-card grid-style">
-              <a href="{{ product.url }}" aria-label="{{ product.title }}">
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
-                {% else %}
-                  <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
-                {% endif %}
-                <h3>{{ product.title }}</h3>
-                <p>{{ product.price | money }}</p>
-              </a>
-            </div>
-          {% elsif section.settings.display_type == 'editorial' %}
-            <div class="product-card editorial-style">
-              <a href="{{ product.url }}" aria-label="{{ product.title }}">
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
-                {% else %} 
-                  <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
-                {% endif %}
-              </a>
+        {% elsif section.settings.display_type == 'editorial' %}
+          <div class="product-card editorial-style">
+            <a href="{{ product.url }}">
+              <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
               <div class="product-text">
                 <h2>{{ product.title }}</h2>
                 <p>{{ product.description | strip_html | truncatewords: 30 }}</p>
                 <p><strong>{{ product.price | money }}</strong></p>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-    {% endif %}
+            </a>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 {% else %}
   <p>Please select a collection from the section settings.</p>
@@ -204,73 +137,6 @@
           "label": "Editorial"
         }
       ]
-    },
-    {
-      "type": "range",
-      "id": "product_count",
-      "label": "Product count",
-      "min": 1,
-      "max": 50,
-      "step": 1,
-      "default": 5
-    },
-    {
-      "type": "range",
-      "id": "columns",
-      "label": "Columns",
-      "min": 1,
-      "max": 6,
-      "step": 1,
-      "default": 3
-    },
-    {
-      "type": "range",
-      "id": "mobile_columns",
-      "label": "Mobile columns",
-      "min": 1,
-      "max": 3,
-      "step": 1,
-      "default": 1
-    },
-    {
-      "type": "range",
-      "id": "horizontal_gap",
-      "label": "Horizontal gap (px)",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "default": 12
-    },
-    {
-      "type": "range",
-      "id": "vertical_gap",
-      "label": "Vertical gap (px)",
-      "min": 0,
-      "max": 40,
-      "step": 2,
-      "default": 24
-    },
-    {
-      "type": "select",
-      "id": "width",
-      "label": "Section layout width",
-      "default": "page",
-      "options": [
-        {
-          "value": "page",
-          "label": "Page"
-        },
-        {
-          "value": "full",
-          "label": "Full"
-        }
-      ]
-    },
-    {
-      "type": "checkbox",
-      "id": "carousel_mobile",
-      "label": "Carousel on mobile (grid only)",
-      "default": false
     }
   ],
   "presets": [
