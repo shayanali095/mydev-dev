@@ -2,10 +2,29 @@
 {
   "name": "Product List",
   "settings": [],
+  "blocks": [
+    {
+      "type": "product_block",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
   "presets": [
     {
       "name": "Product List",
-      "category": "Products"
+      "category": "Products",
+      "blocks": [
+        {
+          "type": "product_block"
+        }
+      ]
     }
   ]
 }
