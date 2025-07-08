@@ -41,35 +41,10 @@
   </div>
 </section>
 
-<!-- Product List Rendering -->
-<section class="product-list" style="padding: 40px 20px;">
-  <h2 style="font-size: 26px;">🧺 Product List</h2>
-
-  <!-- Header Group -->
-  <div style="margin-left: 20px;">
-    <h3 style="font-size: 22px;">📁 Header</h3>
-    <p style="margin-left: 20px; font-size: 18px;">
-      <strong>Collection Title:</strong> {{ section.settings.collection_title }}
-    </p>
-    {% if section.settings.show_view_all %}
-      <p style="margin-left: 20px;">
-        <a href="/collections/all" style="text-decoration: underline; font-weight: bold;">View All Products</a>
-      </p>
-    {% endif %}
-  </div>
-
-  <!-- Product Card Group -->
-  <div style="margin-left: 20px; margin-top: 20px;">
-    <h3 style="font-size: 22px;">📁 Product Card</h3>
-    <div style="margin-left: 20px; width: {{ section.settings.product_image_size }}px; height: auto; background: #eee; padding: 20px; border-radius: 6px;">
-      🖼 Product Image Placeholder ({{ section.settings.product_image_size }}px)
-    </div>
-  </div>
-</section>
 
 {% schema %}
 {
-  "name": "Hero + Product List",
+  "name": "Hero",
   "settings": [
     {
       "type": "image_picker",
@@ -117,7 +92,6 @@
       "label": "Button Text Color",
       "default": "#ffffff"
     },
-
     {
       "type": "header",
       "content": "Text Layout"
@@ -145,7 +119,7 @@
     {
       "type": "range",
       "id": "title_font",
-      "label": "Title Font Size",
+      "label": "Title font Size",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -154,13 +128,12 @@
     {
       "type": "range",
       "id": "subtitle_font",
-      "label": "Subtitle Font Size",
+      "label": "Subtitle font Size",
       "min": 0,
       "max": 100,
       "step": 2,
       "default": 14
     },
-
     {
       "type": "header",
       "content": "Text Padding"
@@ -186,37 +159,8 @@
 
     {
       "type": "header",
-      "content": "🧺 Product List"
+      "content": "Product List"
     },
-    {
-      "type": "header",
-      "content": " 📁 Header"
-    },
-    {
-      "type": "text",
-      "id": "collection_title",
-      "label": "  Collection Title",
-      "default": "New Arrivals"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "  Show 'View All' Button",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": " 📁 Product Card"
-    },
-    {
-      "type": "range",
-      "id": "product_image_size",
-      "label": "  Product Image Size",
-      "min": 100,
-      "max": 600,
-      "step": 10,
-      "default": 300
-    }
   ]
 }
 {% endschema %}
