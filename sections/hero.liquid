@@ -9,10 +9,7 @@
     color: {{ section.settings.text_color }};
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 20px 0;
-  ">
+    justify-content: center;">
     
   <div class="hero-content" style="
       max-width: 800px;
@@ -42,40 +39,6 @@
       </a>
     {% endif %}
   </div>
-
-  {% if section.settings.category_collections != blank %}
-    <div class="collection-list" style="width: 100%; max-width: 1200px; padding: 20px;">
-      {% for collection in section.settings.category_collections %}
-        <div class="collection-item" style="margin-bottom: 30px;">
-          <h2 style="font-size: 24px; cursor: pointer;" onclick="this.nextElementSibling.classList.toggle('active')">
-            {{ collection.title }}
-          </h2>
-          <div class="products-grid" style="display: none; gap: 20px; flex-wrap: wrap;" class="product-wrapper">
-            {% for product in collection.products limit: 4 %}
-              <div style="width: 23%; border: 1px solid #eee; padding: 10px;">
-                <a href="{{ product.url }}">
-                  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}" style="width: 100%;">
-                  <p>{{ product.title }}</p>
-                  <p>{{ product.price | money }}</p>
-                </a>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.collection-item h2').forEach(heading => {
-          heading.addEventListener('click', function () {
-            const grid = this.nextElementSibling;
-            grid.style.display = grid.style.display === 'flex' ? 'none' : 'flex';
-          });
-        });
-      });
-    </script>
-  {% endif %}
 </section>
 
 {% schema %}
@@ -128,6 +91,7 @@
       "label": "Button Text Color",
       "default": "#ffffff"
     },
+
     {
       "type": "header",
       "content": "Text Layout"
@@ -155,7 +119,7 @@
     {
       "type": "range",
       "id": "title_font",
-      "label": "Title font Size",
+      "label": "Title Font Size",
       "min": 0,
       "max": 100,
       "step": 5,
@@ -164,12 +128,13 @@
     {
       "type": "range",
       "id": "subtitle_font",
-      "label": "Subtitle font Size",
+      "label": "Subtitle Font Size",
       "min": 0,
       "max": 100,
       "step": 2,
       "default": 14
     },
+
     {
       "type": "header",
       "content": "Text Padding"
@@ -192,14 +157,39 @@
       "step": 5,
       "default": 20
     },
+
     {
       "type": "header",
-      "content": "Product List"
+      "content": "🧺 Product List"
     },
     {
-      "type": "collection_list",
-      "id": "category_collections",
-      "label": "Choose Categories to Display"
+      "type": "header",
+      "content": " 📁 Header"
+    },
+    {
+      "type": "text",
+      "id": "collection_title",
+      "label": "  Collection Title",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "  Show 'View All' Button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": " 📁 Product Card"
+    },
+    {
+      "type": "range",
+      "id": "product_image_size",
+      "label": "  Product Image Size",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "default": 300
     }
   ]
 }
