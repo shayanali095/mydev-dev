@@ -21,11 +21,15 @@
       padding-right: 20px;
     ">
     {% if section.settings.hero_title != blank %}
-      <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">{{ section.settings.hero_title }}</h1>
+      <h1 style="font-size: {{ section.settings.title_font }}px; margin-bottom: 1rem;">
+        {{ section.settings.hero_title }}
+      </h1>
     {% endif %}
     
     {% if section.settings.hero_subtitle != blank %}
-      <p style="font-size: 1.25rem; margin-bottom: 1.5rem;">{{ section.settings.hero_subtitle }}</p>
+      <p style="font-size: {{ section.settings.subtitle_font }}px; margin-bottom: 1.5rem;">
+        {{ section.settings.hero_subtitle }}
+      </p>
     {% endif %}
     
     {% if section.settings.hero_button_label != blank %}
@@ -112,19 +116,19 @@
       ],
       "default": "center"
     },
- {
+    {
       "type": "range",
       "id": "title_font",
-      "label": "Title font",
+      "label": "Title font Size",
       "min": 0,
       "max": 100,
       "step": 5,
       "default": 20
-    }, 
+    },
     {
       "type": "range",
       "id": "subtitle_font",
-      "label": "Subtitle font",
+      "label": "Subtitle font Size",
       "min": 0,
       "max": 100,
       "step": 5,
