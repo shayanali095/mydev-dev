@@ -9,7 +9,10 @@
     color: {{ section.settings.text_color }};
     display: flex;
     align-items: center;
-    justify-content: center;">
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 0;
+  ">
     
   <div class="hero-content" style="
       max-width: 800px;
@@ -39,8 +42,41 @@
       </a>
     {% endif %}
   </div>
-</section>
 
+  {% if section.settings.category_collections != blank %}
+    <div class="collection-list" style="width: 100%; max-width: 1200px; padding: 20px;">
+      {% for collection in section.settings.category_collections %}
+        <div class="collection-item" style="margin-bottom: 30px;">
+          <h2 style="font-size: 24px; cursor: pointer;" onclick="this.nextElementSibling.classList.toggle('active')">
+            {{ collection.title }}
+          </h2>
+          <div class="products-grid" style="display: none; gap: 20px; flex-wrap: wrap;" class="product-wrapper">
+            {% for product in collection.products limit: 4 %}
+              <div style="width: 23%; border: 1px solid #eee; padding: 10px;">
+                <a href="{{ product.url }}">
+                  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}" style="width: 100%;">
+                  <p>{{ product.title }}</p>
+                  <p>{{ product.price | money }}</p>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.collection-item h2').forEach(heading => {
+          heading.addEventListener('click', function () {
+            const grid = this.nextElementSibling;
+            grid.style.display = grid.style.display === 'flex' ? 'none' : 'flex';
+          });
+        });
+      });
+    </script>
+  {% endif %}
+</section>
 
 {% schema %}
 {
@@ -155,6 +191,15 @@
       "max": 100,
       "step": 5,
       "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Product List"
+    },
+    {
+      "type": "collection_list",
+      "id": "category_collections",
+      "label": "Choose Categories to Display"
     }
   ]
 }
