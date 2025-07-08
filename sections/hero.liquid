@@ -41,9 +41,35 @@
   </div>
 </section>
 
+<!-- Product List Rendering -->
+<section class="product-list" style="padding: 40px 20px;">
+  <h2 style="font-size: 26px;">🧺 Product List</h2>
+
+  <!-- Header Group -->
+  <div style="margin-left: 20px;">
+    <h3 style="font-size: 22px;">📁 Header</h3>
+    <p style="margin-left: 20px; font-size: 18px;">
+      <strong>Collection Title:</strong> {{ section.settings.collection_title }}
+    </p>
+    {% if section.settings.show_view_all %}
+      <p style="margin-left: 20px;">
+        <a href="/collections/all" style="text-decoration: underline; font-weight: bold;">View All Products</a>
+      </p>
+    {% endif %}
+  </div>
+
+  <!-- Product Card Group -->
+  <div style="margin-left: 20px; margin-top: 20px;">
+    <h3 style="font-size: 22px;">📁 Product Card</h3>
+    <div style="margin-left: 20px; width: {{ section.settings.product_image_size }}px; height: auto; background: #eee; padding: 20px; border-radius: 6px;">
+      🖼 Product Image Placeholder ({{ section.settings.product_image_size }}px)
+    </div>
+  </div>
+</section>
+
 {% schema %}
 {
-  "name": "Hero",
+  "name": "Hero + Product List",
   "settings": [
     {
       "type": "image_picker",
