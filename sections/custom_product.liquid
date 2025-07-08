@@ -93,19 +93,22 @@
   }
 </style>
 
-
-
 {% if section.settings.collection != blank %}
+  {% assign current_collection = collections[section.settings.collection] %}
   <div class="collection-products {% if section.settings.width == 'full' %}full-width{% else %}page-width{% endif %}">
-    <h2>{{ section.settings.collection.title }}</h2>
+    <h2>{{ current_collection.title }}</h2>
 
     <div class="product-display layout-{{ section.settings.display_type }}">
-      {% assign limited_products = section.settings.collection.products | slice: 0, section.settings.product_count %}
+      {% assign limited_products = current_collection.products | slice: 0, section.settings.product_count %}
       {% for product in limited_products %}
         {% if section.settings.display_type == 'grid' %}
           <div class="product-card grid-style">
             <a href="{{ product.url }}">
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
+              {% else %}
+                <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
+              {% endif %}
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </a>
@@ -113,7 +116,11 @@
         {% elsif section.settings.display_type == 'editorial' %}
           <div class="product-card editorial-style">
             <a href="{{ product.url }}">
-              <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
+              {% else %}
+                <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
+              {% endif %}
               <div class="product-text">
                 <h2>{{ product.title }}</h2>
                 <p>{{ product.description | strip_html | truncatewords: 30 }}</p>
@@ -128,6 +135,10 @@
 {% else %}
   <p>Please select a collection from the section settings.</p>
 {% endif %}
+
+
+
+
 
 {% schema %}
 {
