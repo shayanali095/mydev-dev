@@ -14,15 +14,13 @@
         "type": "header",
         "settings": {}
       },
+      "hero-1": {
+        "type": "hero",
+        "settings": {}
+      },
       "feature-row": {
         "type": "feature-row",
-        "settings": {
-          "layout": "left",
-          "title": "Image with text",
-          "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-          "button_label": "",
-          "button_link": ""
-        }
+        "settings": {}
       },
       "feature-columns": {
         "type": "feature-columns",
@@ -52,37 +50,27 @@
       "collection": {
         "type": "collection",
         "settings": {
-          "title": "Featured collection",
-          "collection": "",
-          "grid": 4,
-          "rows": 2,
-          "show_vendor": false,
-          "show_view_all": false
+          "grid": 4
         }
+      },
+      "hero-2": {
+        "type": "hero",
+        "settings": {}
       },
       "quotes": {
         "type": "quotes",
         "blocks": {
           "quotes-0": {
             "type": "quote",
-            "settings": {
-              "quote": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-              "author": "Author's name"
-            }
+            "settings": {}
           },
           "quotes-1": {
             "type": "quote",
-            "settings": {
-              "quote": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-              "author": "Author's name"
-            }
+            "settings": {}
           },
           "quotes-2": {
             "type": "quote",
-            "settings": {
-              "quote": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>",
-              "author": "Author's name"
-            }
+            "settings": {}
           }
         },
         "block_order": [
@@ -99,27 +87,15 @@
         "blocks": {
           "image-bar-0": {
             "type": "image",
-            "settings": {
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
+            "settings": {}
           },
           "image-bar-1": {
             "type": "image",
-            "settings": {
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
+            "settings": {}
           },
           "image-bar-2": {
             "type": "image",
-            "settings": {
-              "alignment": "center",
-              "link": "",
-              "cta_label": ""
-            }
+            "settings": {}
           }
         },
         "block_order": [
@@ -127,9 +103,7 @@
           "image-bar-1",
           "image-bar-2"
         ],
-        "settings": {
-          "section_height": "medium"
-        }
+        "settings": {}
       },
       "footer": {
         "type": "footer",
@@ -150,25 +124,17 @@
         "settings": {
           "show_payment_icons": true
         }
-      },
-      "custom_header": {
-        "type": "custom_header",
-        "settings": {
-          "logo_position": "left",
-          "logo_padding_top": 5,
-          "logo_padding_right": 0,
-          "logo_padding_bottom": 0,
-          "logo_padding_left": 0,
-          "logo": "shopify://shop_images/DERMATEST_Siegel_DermatestGarantie_202101_DE_CMYK_2525201_1.png",
-          "logo_width": 140,
-          "show_logo": false,
-          "main_menu": "home",
-          "menu_font": 22,
-          "menu_position": "center"
-        }
       }
     },
-    "content_for_index": []
+    "content_for_index": [
+      "hero-1",
+      "feature-row",
+      "feature-columns",
+      "collection",
+      "hero-2",
+      "quotes",
+      "image-bar"
+    ]
   },
   "presets": {
     "Default": {
@@ -357,6 +323,10 @@
             "color_text": "#ffffff"
           }
         },
+        "hero": {
+          "type": "hero",
+          "settings": {}
+        },
         "slideshow": {
           "type": "slideshow",
           "blocks": {
@@ -529,6 +499,7 @@
         }
       },
       "content_for_index": [
+        "hero",
         "featured-collections",
         "slideshow",
         "1492033924902",
