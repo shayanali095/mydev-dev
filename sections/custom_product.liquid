@@ -19,6 +19,15 @@
     .product-display.layout-grid {
       grid-template-columns: repeat({{ section.settings.mobile_columns }}, 1fr);
     }
+
+    .product-card.editorial-style {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .product-card.editorial-style img {
+      width: 100%;
+    }
   }
 
   .product-card.grid-style {
@@ -91,6 +100,22 @@
     max-width: 1200px;
     margin: 0 auto;
   }
+
+  /* Carousel styling (for mobile if enabled) */
+  .carousel-wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
+  }
+
+  .carousel-slide {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: calc(100% / {{ section.settings.mobile_columns | default: 1 }});
+  }
 </style>
 
 {% if section.settings.collection != blank %}
@@ -98,12 +123,13 @@
   <div class="collection-products {% if section.settings.width == 'full' %}full-width{% else %}page-width{% endif %}">
     <h2>{{ current_collection.title }}</h2>
 
-    <div class="product-display layout-{{ section.settings.display_type }}">
-      {% assign limited_products = current_collection.products | slice: 0, section.settings.product_count %}
-      {% for product in limited_products %}
-        {% if section.settings.display_type == 'grid' %}
-          <div class="product-card grid-style">
-            <a href="{{ product.url }}">
+    {% assign limited_products = current_collection.products | slice: 0, section.settings.product_count %}
+
+    {% if section.settings.carousel_mobile and section.settings.display_type == 'grid' %}
+      <div class="carousel-wrapper">
+        {% for product in limited_products %}
+          <div class="product-card grid-style carousel-slide">
+            <a href="{{ product.url }}" aria-label="{{ product.title }}">
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
               {% else %}
@@ -113,32 +139,46 @@
               <p>{{ product.price | money }}</p>
             </a>
           </div>
-        {% elsif section.settings.display_type == 'editorial' %}
-          <div class="product-card editorial-style">
-            <a href="{{ product.url }}">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
-              {% else %}
-                <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
-              {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="product-display layout-{{ section.settings.display_type }}">
+        {% for product in limited_products %}
+          {% if section.settings.display_type == 'grid' %}
+            <div class="product-card grid-style">
+              <a href="{{ product.url }}" aria-label="{{ product.title }}">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
+                {% else %}
+                  <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
+                {% endif %}
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.price | money }}</p>
+              </a>
+            </div>
+          {% elsif section.settings.display_type == 'editorial' %}
+            <div class="product-card editorial-style">
+              <a href="{{ product.url }}" aria-label="{{ product.title }}">
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
+                {% else %}
+                  <img src="{{ 'placeholder.jpg' | asset_url }}" alt="No image">
+                {% endif %}
+              </a>
               <div class="product-text">
                 <h2>{{ product.title }}</h2>
                 <p>{{ product.description | strip_html | truncatewords: 30 }}</p>
                 <p><strong>{{ product.price | money }}</strong></p>
               </div>
-            </a>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 {% else %}
   <p>Please select a collection from the section settings.</p>
 {% endif %}
-
-
-
-
 
 {% schema %}
 {
@@ -229,7 +269,7 @@
     {
       "type": "checkbox",
       "id": "carousel_mobile",
-      "label": "Carousel on mobile",
+      "label": "Carousel on mobile (grid only)",
       "default": false
     }
   ],
