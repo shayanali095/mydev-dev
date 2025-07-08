@@ -357,10 +357,6 @@
             "color_text": "#ffffff"
           }
         },
-        "hero": {
-          "type": "hero",
-          "settings": {}
-        },
         "slideshow": {
           "type": "slideshow",
           "blocks": {
@@ -533,7 +529,6 @@
         }
       },
       "content_for_index": [
-        "hero",
         "featured-collections",
         "slideshow",
         "1492033924902",
