@@ -189,14 +189,30 @@
       "custom_product": {
         "type": "custom_product",
         "settings": {
-          "collection": ""
+          "collection": "",
+          "display_type": "grid",
+          "product_count": 5,
+          "columns": 3,
+          "mobile_columns": 1,
+          "horizontal_gap": 12,
+          "vertical_gap": 24,
+          "width": "page",
+          "carousel_mobile": false
         }
       },
       "custom_product_3jaB7F": {
         "type": "custom_product",
         "name": "Product List",
         "settings": {
-          "collection": "show-color-variations"
+          "collection": "clothes",
+          "display_type": "grid",
+          "product_count": 5,
+          "columns": 3,
+          "mobile_columns": 1,
+          "horizontal_gap": 12,
+          "vertical_gap": 24,
+          "width": "page",
+          "carousel_mobile": false
         }
       }
     },
