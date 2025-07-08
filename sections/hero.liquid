@@ -9,11 +9,17 @@
     color: {{ section.settings.text_color }};
     display: flex;
     align-items: center;
-    justify-content: center;
-   padding: {{ section.settings.padding_top | default: 0 }}px 20px {{ section.settings.padding_bottom | default: 0 }}px 20px;
->
+    justify-content: center;">
     
-  <div class="hero-content" style="max-width: 800px; width: 100%; text-align: {{ section.settings.text_alignment }};">
+  <div class="hero-content" style="
+      max-width: 800px;
+      width: 100%;
+      text-align: {{ section.settings.text_alignment }};
+      padding-top: {{ section.settings.padding_top | default: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;
+      padding-left: 20px;
+      padding-right: 20px;
+    ">
     {% if section.settings.hero_title != blank %}
       <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">{{ section.settings.hero_title }}</h1>
     {% endif %}
@@ -64,7 +70,6 @@
       "id": "hero_button_link",
       "label": "Button Link"
     },
-   
     {
       "type": "color",
       "id": "text_color",
@@ -87,7 +92,7 @@
       "type": "header",
       "content": "Text Layout"
     },
-     {
+    {
       "type": "range",
       "id": "hero_height",
       "label": "Hero Section Height (in px)",
@@ -109,27 +114,26 @@
     },
     {
       "type": "header",
-      "content": "Padding"
+      "content": "Text Padding"
     },
-   {
-  "type": "range",
-  "id": "padding_top",
-  "label": "Top Padding",
-  "min": 0,
-  "max": 100,
-  "step": 5,
-  "default": 20
-},
-{
-  "type": "range",
-  "id": "padding_bottom",
-  "label": "Bottom Padding",
-  "min": 0,
-  "max": 100,
-  "step": 5,
-  "default": 20
-}
-
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 20
+    }
   ]
 }
 {% endschema %}
