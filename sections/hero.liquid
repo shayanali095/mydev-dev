@@ -10,10 +10,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 0 20px;">
     
-  <div class="hero-content" style="max-width: 800px; width: 100%;">
+  <div class="hero-content" style="max-width: 800px; width: 100%; text-align: {{ section.settings.text_alignment }};">
     {% if section.settings.hero_title != blank %}
       <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">{{ section.settings.hero_title }}</h1>
     {% endif %}
@@ -30,6 +29,7 @@
     {% endif %}
   </div>
 </section>
+
 
 {% schema %}
 {
