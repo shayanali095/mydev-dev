@@ -62,7 +62,17 @@
       },
       "hero-2": {
         "type": "hero",
-        "settings": {}
+        "settings": {
+          "hero_background": "shopify://shop_images/vestrahorn-mountains-stokksnes-iceland_335224-667.avif",
+          "hero_title": "Welcome to Our Store",
+          "hero_subtitle": "Discover our latest collection and best deals",
+          "hero_button_label": "Shop Now",
+          "hero_button_link": "",
+          "hero_height": 100,
+          "text_color": "#ffffff",
+          "button_color": "#000000",
+          "button_text_color": "#ffffff"
+        }
       },
       "quotes": {
         "type": "quotes",
@@ -159,21 +169,16 @@
         "type": "custom_header",
         "settings": {
           "logo_position": "left",
-          "logo_padding_top": 10,
-          "logo_padding_right": 10,
-          "logo_padding_bottom": 10,
-          "logo_padding_left": 10,
-          "logo_width": 200,
+          "logo_padding_top": 0,
+          "logo_padding_right": 0,
+          "logo_padding_bottom": 0,
+          "logo_padding_left": 20,
+          "logo": "shopify://shop_images/png-clipart-nike-logo-nike-just-do-it-swoosh-logo-brand-nike-logo-free-miscellaneous-angle-thumbnail-removebg-preview.png",
+          "logo_width": 90,
           "show_logo": false,
-          "main_menu": "",
+          "main_menu": "home",
           "menu_font": 16,
           "menu_position": "right"
-        }
-      },
-      "custom_template": {
-        "type": "custom_template",
-        "settings": {
-          "hero_video_url": ""
         }
       }
     },
