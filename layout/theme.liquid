@@ -6,7 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{ content_for_header }}
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.shopifycdn.com/roboto/roboto_n4.woff2') format('woff2'),
+       url('https://fonts.shopifycdn.com/roboto/roboto_n4.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.shopifycdn.com/roboto/roboto_n7.woff2') format('woff2'),
+       url('https://fonts.shopifycdn.com/roboto/roboto_n7.woff') format('woff');
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+</style>
+
 
   </head>
   <body>
