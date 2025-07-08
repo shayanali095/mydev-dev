@@ -854,18 +854,21 @@
     background-image: url({{ section.settings.hero_background | image_url: width: 1600 }});
     background-size: cover;
     background-position: center;
-    padding: 100px 20px;
-    text-align: center;
+    height: {{ section.settings.hero_height }}px;
     color: {{ section.settings.text_color }};
-    height: {{ section.settings.hero_height }}px;">
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;">
     
-  <div class="hero-content" style="max-width: 800px; margin: 0 auto;">
+  <div class="hero-content" style="max-width: 800px; width: 100%;">
     {% if section.settings.hero_title != blank %}
-      <h1 style="font-size: 48px; margin-bottom: 20px;">{{ section.settings.hero_title }}</h1>
+      <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">{{ section.settings.hero_title }}</h1>
     {% endif %}
     
     {% if section.settings.hero_subtitle != blank %}
-      <p style="font-size: 20px; margin-bottom: 30px;">{{ section.settings.hero_subtitle }}</p>
+      <p style="font-size: 1.25rem; margin-bottom: 1.5rem;">{{ section.settings.hero_subtitle }}</p>
     {% endif %}
     
     {% if section.settings.hero_button_label != blank %}
