@@ -170,10 +170,24 @@
           "menu_font": 22,
           "menu_position": "center"
         }
+      },
+      "custom_template": {
+        "type": "custom_template",
+        "settings": {
+          "hero_video_url": ""
+        }
+      },
+      "custom_template_pfBYtM": {
+        "type": "custom_template",
+        "name": "Templates",
+        "settings": {
+          "hero_video_url": ""
+        }
       }
     },
     "content_for_index": [
-      "hero-1"
+      "hero-1",
+      "custom_template_pfBYtM"
     ]
   },
   "presets": {
