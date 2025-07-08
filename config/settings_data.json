@@ -14,10 +14,6 @@
         "type": "header",
         "settings": {}
       },
-      "hero-1": {
-        "type": "hero",
-        "settings": {}
-      },
       "feature-row": {
         "type": "feature-row",
         "settings": {
@@ -170,25 +166,9 @@
           "menu_font": 22,
           "menu_position": "center"
         }
-      },
-      "custom_template": {
-        "type": "custom_template",
-        "settings": {
-          "hero_video_url": ""
-        }
-      },
-      "custom_template_pfBYtM": {
-        "type": "custom_template",
-        "name": "Templates",
-        "settings": {
-          "hero_video_url": ""
-        }
       }
     },
-    "content_for_index": [
-      "hero-1",
-      "custom_template_pfBYtM"
-    ]
+    "content_for_index": []
   },
   "presets": {
     "Default": {
