@@ -50,3 +50,118 @@
     </div>
   {% endif %}
 </div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "header",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Settings"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_top",
+      "label": "Logo Padding Top (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_right",
+      "label": "Logo Padding Right (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_bottom",
+      "label": "Logo Padding Bottom (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "logo_padding_left",
+      "label": "Logo Padding Left (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 10
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Upload Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo Width (px)",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "default": 200
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Hide logo on home page",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Menu Setting"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main Menu"
+    },
+    {
+      "type": "range",
+      "id": "menu_font",
+      "label": "Menu Font Size (px)",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "menu_position",
+      "label": "Menu Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}
