@@ -84,6 +84,26 @@
     margin-bottom: 8px;
     line-height: 1.5;
   }
+
+  .add-to-cart-btn {
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(to right, #feb47b, #ff7e5f);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
 </style>
 
 
@@ -100,7 +120,7 @@
               <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
-                    <button> Add to Cart</button>
+                    <button class="add-to-cart-btn"> Add to Cart</button>
             </a>
           </div>
         {% elsif section.settings.display_type == 'editorial' %}
