@@ -90,7 +90,6 @@
 {% if section.settings.collection != blank %}
   <div class="collection-products">
     <h2>{{ section.settings.collection.title }}</h2>
-                    <button> Add to Cart</button>
 
 
     <div class="product-display layout-{{ section.settings.display_type }}">
@@ -101,6 +100,7 @@
               <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
+                    <button> Add to Cart</button>
             </a>
           </div>
         {% elsif section.settings.display_type == 'editorial' %}
