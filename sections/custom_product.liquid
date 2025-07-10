@@ -136,7 +136,6 @@
     🛒
   </a>
 </li>
-
 <!-- Product Section -->
 {% if section.settings.collection != blank %}
   <div class="collection-products">
@@ -151,13 +150,9 @@
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </a>
-            <input
-              type="number"
-              min="1"
-              value="1"
-              class="product-quantity"
-              data-product-id="{{ product.variants.first.id }}"
-            >
+
+            <!-- Removed quantity input from here -->
+
             <button
               class="add-to-cart-btn"
               data-product-id="{{ product.variants.first.id }}"
@@ -194,6 +189,28 @@
   <div class="cart-items"></div>
 </div>
 
+<!-- Cart Icon Button -->
+<li>
+  <a
+    id="open-cart-drawer"
+    href="/cart"
+    style="
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 28px;
+      text-decoration: none;
+      background: white;
+      border-radius: 50%;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    "
+  >
+    🛒
+  </a>
+</li>
+
 <!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -229,13 +246,38 @@
               <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
               <div>
                 <div style="font-weight:bold;">${item.product_title}</div>
-                <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}<br><small>Qty: ${item.quantity}</small></div>
+                <div style="color:#666;">
+                  $${(item.final_line_price / 100).toFixed(2)}<br>
+                  <small>
+                    Qty: 
+                    <input type="number" min="1" value="${item.quantity}" class="cart-quantity" data-line="${index + 1}" style="width:50px; padding:2px; margin-left:5px;" />
+                  </small>
+                </div>
               </div>
             </div>
             <span class="remove-item" data-line="${index + 1}" style="cursor:pointer; color:#cc0000; font-size:16px;">✘</span>
           </div>
         `;
         cartItems.appendChild(itemElement);
+      });
+
+      // Quantity change handler
+      document.querySelectorAll(".cart-quantity").forEach(input => {
+        input.addEventListener("change", async () => {
+          const line = input.dataset.line;
+          const quantity = parseInt(input.value);
+          if (quantity > 0) {
+            await fetch("/cart/change.js", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify({ line, quantity })
+            });
+            await loadCart(); // Reload cart
+          }
+        });
       });
 
       // Remove item
@@ -250,20 +292,16 @@
             },
             body: JSON.stringify({ line, quantity: 0 })
           });
-
           await loadCart(); // Refresh cart
         });
       });
     }
 
-    // Add to cart button handler with quantity
+    // Add to cart button (always adds quantity = 1)
     document.querySelectorAll(".add-to-cart-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const id = button.dataset.productId;
-        const quantityInput = document.querySelector(
-          `.product-quantity[data-product-id="${id}"]`
-        );
-        const quantity = parseInt(quantityInput?.value || "1");
+        const quantity = 1;
 
         await fetch("/cart/add.js", {
           method: "POST",
@@ -279,7 +317,7 @@
       });
     });
 
-    // Click outside to close drawer
+    // Click outside to close cart
     document.addEventListener("click", (e) => {
       if (
         !cartDrawer.contains(e.target) &&
