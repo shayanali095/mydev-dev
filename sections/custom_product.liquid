@@ -1,140 +1,147 @@
 <style>
-    .collection-products {
-      padding: 40px 20px;
-    }
+  .collection-products {
+    padding: 40px 20px;
+  }
 
-    .collection-products h2 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 30px;
-    }
+  .collection-products h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+  }
 
-    .product-display.layout-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
+  .product-display.layout-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
 
-    .product-card.grid-style {
-      width: 240px;
-      height: 370px;
-      text-align: center;
-      border: 1px solid #eee;
-      padding: 15px;
-      border-radius: 10px;
-      transition: box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+  .product-card.grid-style {
+    width: 240px;
+    height: 370px;
+    text-align: center;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-    .product-card.grid-style:hover {
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+  .product-card.grid-style:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
 
-    .product-card.grid-style img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      border-radius: 5px;
-    }
+  .product-card.grid-style img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
 
-    .product-card.grid-style h3 {
-      font-size: 1rem;
-      margin: 10px 0 5px;
-    }
+  .product-card.grid-style h3 {
+    font-size: 1rem;
+    margin: 10px 0 5px;
+  }
 
-    .product-card.grid-style p {
-      font-weight: bold;
-      color: #333;
-    }
+  .product-card.grid-style p {
+    font-weight: bold;
+    color: #333;
+  }
 
-    .product-display.layout-editorial {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
+  .product-display.layout-editorial {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
 
-    .product-card.editorial-style {
-      display: flex;
-      gap: 30px;
-      align-items: center;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 20px;
-    }
+  .product-card.editorial-style {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+  }
 
-    .product-card.editorial-style img {
-      width: 300px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
+  .product-card.editorial-style img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
 
-    .product-card.editorial-style .product-text {
-      max-width: 600px;
-    }
+  .product-card.editorial-style .product-text {
+    max-width: 600px;
+  }
 
-    .product-card.editorial-style h2 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
+  .product-card.editorial-style h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
 
-    .product-card.editorial-style p {
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
+  .product-card.editorial-style p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
 
-    .add-to-cart-btn {
-      background: linear-gradient(to right, #6ec1e4, #a6d5f7);
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      padding: 10px 22px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
+  .add-to-cart-btn {
+    background: linear-gradient(to right, #6ec1e4, #a6d5f7);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
 
-    .add-to-cart-btn:hover {
-      background: linear-gradient(to right, #a6d5f7, #6ec1e4);
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    }
+  .add-to-cart-btn:hover {
+    background: linear-gradient(to right, #a6d5f7, #6ec1e4);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
 
-    .cart-drawer {
-      position: fixed;
-      top: 0;
-      right: -350px;
-      width: 300px;
-      height: 100%;
-      background: #fff;
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-      padding: 20px;
-      transition: right 0.3s ease;
-      z-index: 1000;
-      overflow-y: auto;
-    }
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 300px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
 
-    .cart-drawer.open {
-      right: 0;
-    }
+  .cart-drawer.open {
+    right: 0;
+  }
 
-    .cart-drawer h3 {
-      margin-top: 0;
-    }
+  .cart-drawer h3 {
+    margin-top: 10px;
+  }
 
-    .cart-items div {
-      border-bottom: 1px solid #eee;
-      padding: 10px 0;
-    }
-  #cross-btn{
-    cursor : pointer;
+  .cart-items div {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
+
+  #cross-btn {
+    cursor: pointer;
+    font-size: 22px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #333;
   }
 </style>
 
+<!-- Cart Icon Button -->
 <li>
   <a
     id="open-cart-drawer"
@@ -148,7 +155,7 @@
       background: white;
       border-radius: 50%;
       padding: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       z-index: 999;
     "
   >
@@ -156,6 +163,7 @@
   </a>
 </li>
 
+<!-- Product Section -->
 {% if section.settings.collection != blank %}
   <div class="collection-products">
     <h2>{{ section.settings.collection.title }}</h2>
@@ -179,7 +187,6 @@
               Add to Cart
             </button>
           </div>
-
         {% elsif section.settings.display_type == 'editorial' %}
           <div class="product-card editorial-style">
             <a href="{{ product.url }}" target="_blank">
@@ -199,24 +206,32 @@
   </div>
 {% endif %}
 
-<!-- Cart Drawer HTML -->
+<!-- Cart Drawer -->
 <div class="cart-drawer">
-  <id cross-btn> ❌ </id>
+  <span id="cross-btn">❌</span>
   <h3>Your Cart</h3>
   <div class="cart-items"></div>
 </div>
 
+<!-- JavaScript -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const openCartBtn = document.getElementById("open-cart-drawer");
     const cartDrawer = document.querySelector(".cart-drawer");
     const cartItems = document.querySelector(".cart-items");
+    const crossBtn = document.getElementById("cross-btn");
 
-    // Open drawer on emoji click
+    // Open cart
     openCartBtn.addEventListener("click", function (e) {
       e.preventDefault();
       cartDrawer.classList.add("open");
       document.body.classList.add("no-scroll");
+    });
+
+    // Close cart
+    crossBtn.addEventListener("click", () => {
+      cartDrawer.classList.remove("open");
+      document.body.classList.remove("no-scroll");
     });
 
     // Load cart items
@@ -239,6 +254,7 @@
       });
     }
 
+    // Add to cart button handler
     document.querySelectorAll(".add-to-cart-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const id = button.dataset.productId;
@@ -257,9 +273,11 @@
       });
     });
 
+    // Click outside to close
     document.addEventListener("click", (e) => {
       if (!cartDrawer.contains(e.target) && !e.target.closest("#open-cart-drawer") && !e.target.classList.contains("add-to-cart-btn")) {
         cartDrawer.classList.remove("open");
+        document.body.classList.remove("no-scroll");
       }
     });
 
@@ -267,6 +285,7 @@
   });
 </script>
 
+<!-- Shopify Schema -->
 {% schema %}
 {
   "name": "Collection Products",
