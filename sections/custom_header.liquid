@@ -71,15 +71,15 @@
 </div>
 
 <script>
-  document.getElementById("open-cart-drawer").addEventListener("click", function(e) {
-    e.preventDefault();
-
-    const cartDrawer = document.querySelector(".cart-drawer");
-    if (cartDrawer) {
-      cartDrawer.classList.add("open");
-      document.body.classList.add("no-scroll");
-    }
-  });
+    document.getElementById("open-cart-drawer").addEventListener("click", function(e) {
+      e.preventDefault();
+  console.log("drawer")
+      const cartDrawer = document.querySelector(".cart-drawer");
+      if (cartDrawer) {
+        cartDrawer.classList.add("open");
+        document.body.classList.add("no-scroll");
+      }
+    });
 </script>
 
 .cart-drawer { position: fixed; right: 0; top: 0; width: 400px; height: 100%; background: #fff; transform:
