@@ -116,15 +116,18 @@
       {% for product in section.settings.collection.products %}
         {% if section.settings.display_type == 'grid' %}
           <div class="product-card grid-style">
-            <form method="post" action="/cart/add">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <input type="hidden" name="return_to" value="/cart">
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
-              <h3>{{ product.title }}</h3>
-              <p>{{ product.price | money }}</p>
-              <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-            </form>
-          </div>
+  <a href="{{ product.url }}" target="_blank">
+    <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.price | money }}</p>
+  </a>
+  <form method="post" action="/cart/add">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+    <input type="hidden" name="return_to" value="/cart">
+    <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+  </form>
+</div>
+
         {% elsif section.settings.display_type == 'editorial' %}
           <div class="product-card editorial-style">
             <a href="{{ product.url }}">
