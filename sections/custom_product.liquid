@@ -165,12 +165,23 @@
 
 <!-- Drawer Logic -->
 
-const cartDrawer = document.querySelector(".cart-drawer");
-const addToCartBtn = document.querySelector(".add-to-cart-btn");
+<script>
+  const cartDrawer = document.querySelector(".cart-drawer");
+  const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
-addToCartBtn.addEventListener("click", () => {
-  cartDrawer.classList.toggle("open");
-});
+  addToCartButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+      cartDrawer.classList.add("open");
+    });
+  });
+
+  // Optional close logic
+  document.addEventListener("click", (e) => {
+    if (!cartDrawer.contains(e.target) && !e.target.classList.contains('add-to-cart-btn')) {
+      cartDrawer.classList.remove("open");
+    }
+  });
+</script>
 
 
 
