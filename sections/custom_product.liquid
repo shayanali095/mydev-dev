@@ -181,16 +181,38 @@
   <div class="cart-items"></div>
 </div>
 
-<!-- AJAX Add to Cart + Drawer Logic -->
 <script>
   const cartDrawer = document.querySelector(".cart-drawer");
   const cartItems = document.querySelector(".cart-items");
 
+  // Load cart data from Shopify on page load
+  async function loadCart() {
+    const res = await fetch("/cart.js");
+    const cart = await res.json();
+
+    cartItems.innerHTML = ""; // Clear previous content
+
+    cart.items.forEach(item => {
+      const itemElement = document.createElement("div");
+      itemElement.innerHTML = `
+        <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
+          <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
+          <div>
+            <div style="font-weight:bold;">${item.product_title}</div>
+            <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
+          </div>
+        </div>
+      `;
+      cartItems.appendChild(itemElement);
+    });
+  }
+
+  // Add to cart handler
   document.querySelectorAll(".add-to-cart-btn").forEach(button => {
     button.addEventListener("click", async () => {
       const id = button.dataset.productId;
 
-      // Send add-to-cart request to Shopify
+      // Add product to cart
       await fetch("/cart/add.js", {
         method: "POST",
         headers: {
@@ -200,28 +222,14 @@
         body: JSON.stringify({ id, quantity: 1 })
       });
 
-      // Show added product in cart drawer
-      const title = button.dataset.title;
-      const price = button.dataset.price;
-      const image = button.dataset.image;
-
-      const item = document.createElement("div");
-      item.innerHTML = `
-        <div style="display:flex; gap:10px; align-items:center;">
-          <img src="${image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
-          <div>
-            <div style="font-weight:bold;">${title}</div>
-            <div style="color:#666;">${price}</div>
-          </div>
-        </div>
-      `;
-
-      cartItems.appendChild(item);
+      await loadCart(); // Refresh cart from Shopify
       cartDrawer.classList.add("open");
     });
   });
 
-  // Optional: close drawer on outside click
+  window.addEventListener("DOMContentLoaded", loadCart);
+
+  // Close drawer on outside click
   document.addEventListener("click", (e) => {
     if (!cartDrawer.contains(e.target) && !e.target.classList.contains('add-to-cart-btn')) {
       cartDrawer.classList.remove("open");
