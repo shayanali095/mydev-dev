@@ -1,5 +1,59 @@
 {% section 'custom_product' %}
 
+
+
+<div class="product-detail-page" style="max-width: 1000px; margin: auto; padding: 40px 20px;">
+  <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+    <!-- Product Images -->
+    <div style="flex: 1 1 40%;">
+      {% if product.images.size > 1 %}
+        {% for image in product.images %}
+          <img src="{{ image | image_url: width: 600 }}" alt="{{ product.title }}" style="width: 100%; margin-bottom: 15px; border-radius: 8px;" />
+        {% endfor %}
+      {% else %}
+        <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" style="width: 100%; border-radius: 8px;" />
+      {% endif %}
+    </div>
+
+    <!-- Product Info -->
+    <div style="flex: 1 1 50%;">
+      <h1 style="font-size: 2rem; margin-bottom: 15px;">{{ product.title }}</h1>
+      <p style="font-weight: bold; color: #333; font-size: 1.2rem;">{{ product.price | money }}</p>
+      <div style="margin: 20px 0; color: #555;">{{ product.description }}</div>
+
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+        <label for="Quantity">Quantity</label><br>
+        <input id="Quantity" name="quantity" type="number" value="1" min="1" style="width: 60px; padding: 8px; margin-top: 10px; margin-bottom: 20px; text-align: center;" />
+
+        <br>
+        <button type="submit" class="add-to-cart-btn">Order Now</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% style %}
+.add-to-cart-btn {
+  background: linear-gradient(to right, #6ec1e4, #a6d5f7);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background: linear-gradient(to right, #a6d5f7, #6ec1e4);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+{% endstyle %}
+
 {% comment %} <style>
   .collection-products {
     padding: 40px 20px;
