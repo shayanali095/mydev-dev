@@ -103,6 +103,22 @@
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -300px; /* hidden initially */
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.cart-drawer.open {
+  right: 0; 
+}
 
 
 </style>
@@ -142,9 +158,19 @@
         {% endif %}
       {% endfor %}
     </div>
-  </div>
+  </div> 
 {% else %}
 {% endif %}
+
+
+<!-- Drawer Logic -->
+
+const cartDrawer = document.querySelector(".cart-drawer");
+const addToCartBtn = document.querySelector(".add-to-cart-btn");
+
+addToCartBtn.addEventListener("click", () => {
+  cartDrawer.classList.toggle("open");
+});
 
 
 
