@@ -153,18 +153,6 @@
   </a>
 </li>
 
-<script>
-    document.getElementById("open-cart-drawer").addEventListener("click", function(e) {
-      e.preventDefault();
-  console.log("drawer")
-      const cartDrawer = document.querySelector(".cart-drawer");
-      if (cartDrawer) {
-        cartDrawer.classList.add("open");
-        document.body.classList.add("no-scroll");
-      }
-    });
-</script>
-
 {% if section.settings.collection != blank %}
   <div class="collection-products">
     <h2>{{ section.settings.collection.title }}</h2>
@@ -213,39 +201,53 @@
   <h3>Your Cart</h3>
   <div class="cart-items"></div>
 </div>
+const cartDrawer = document.querySelector(".cart-drawer"); const cartItems = document.querySelector(".cart-items");
+
+// Load cart items async function loadCart() { const res = await fetch("/cart.js"); const cart = await res.json();
+
+cartItems.innerHTML = ""; // Clear old items
+
+cart.items.forEach(item => { const itemElement = document.createElement("div"); itemElement.innerHTML = `
+<div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
+  <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
+  <div>
+    <div style="font-weight:bold;">${item.product_title}</div>
+    <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
+  </div>
+</div>
+`; cartItems.appendChild(itemElement); }); }
 
 <script>
-  const cartDrawer = document.querySelector(".cart-drawer");
-  const cartItems = document.querySelector(".cart-items");
+  // Add-to-cart for emoji 🛒
+  document.getElementById("open-cart-drawer").addEventListener("click", async function(e) {
+    e.preventDefault();
+    const id = this.dataset.productId;
 
-  // Load cart data from Shopify on page load
-  async function loadCart() {
-    const res = await fetch("/cart.js");
-    const cart = await res.json();
+    if (!id) {
+      console.error("Product ID missing on emoji");
+      return;
+    }
 
-    cartItems.innerHTML = ""; // Clear previous content
-
-    cart.items.forEach(item => {
-      const itemElement = document.createElement("div");
-      itemElement.innerHTML = `
-        <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
-          <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
-          <div>
-            <div style="font-weight:bold;">${item.product_title}</div>
-            <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
-          </div>
-        </div>
-      `;
-      cartItems.appendChild(itemElement);
+    // Add product to cart
+    await fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ id, quantity: 1 })
     });
-  }
 
-  // Add to cart handler
+    await loadCart();
+    cartDrawer.classList.add("open");
+    document.body.classList.add("no-scroll");
+  });
+
+  // For all other buttons
   document.querySelectorAll(".add-to-cart-btn").forEach(button => {
     button.addEventListener("click", async () => {
       const id = button.dataset.productId;
 
-      // Add product to cart
       await fetch("/cart/add.js", {
         method: "POST",
         headers: {
@@ -255,7 +257,7 @@
         body: JSON.stringify({ id, quantity: 1 })
       });
 
-      await loadCart(); // Refresh cart from Shopify
+      await loadCart();
       cartDrawer.classList.add("open");
     });
   });
@@ -269,7 +271,6 @@
     }
   });
 </script>
-
 {% schema %}
 {
   "name": "Collection Products",
