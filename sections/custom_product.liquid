@@ -18,7 +18,7 @@
 
   .product-card.grid-style {
     width: 240px;
-    height: 370px; /* Fixed height for uniformity */
+    height: 370px;
     text-align: center;
     border: 1px solid #eee;
     padding: 15px;
@@ -85,44 +85,52 @@
     line-height: 1.5;
   }
 
- .add-to-cart-btn {
-  background: linear-gradient(to right, #6ec1e4, #a6d5f7); /* soft blue gradient */
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
+  .add-to-cart-btn {
+    background: linear-gradient(to right, #6ec1e4, #a6d5f7);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
 
-.add-to-cart-btn:hover {
-  background: linear-gradient(to right, #a6d5f7, #6ec1e4); /* reversed on hover */
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  right: -300px; /* hidden initially */
-  width: 300px;
-  height: 100%;
-  background: #fff;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  transition: right 0.3s ease;
-  z-index: 1000;
-}
+  .add-to-cart-btn:hover {
+    background: linear-gradient(to right, #a6d5f7, #6ec1e4);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
 
-.cart-drawer.open {
-  right: 0; 
-}
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
 
+  .cart-drawer.open {
+    right: 0;
+  }
 
+  .cart-drawer h3 {
+    margin-top: 0;
+  }
+
+  .cart-items div {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+  }
 </style>
-
 
 {% if section.settings.collection != blank %}
   <div class="collection-products">
@@ -132,64 +140,94 @@
       {% for product in section.settings.collection.products %}
         {% if section.settings.display_type == 'grid' %}
           <div class="product-card grid-style">
-  <a href="{{ product.url }}" target="_blank">
-    <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
-    <h3>{{ product.title }}</h3>
-    <p>{{ product.price | money }}</p>
-  </a>
-  <form method="post" action="/cart/add">
-    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-    <input type="hidden" name="return_to" value="/cart">
-    <button type="submit" class="add-to-cart-btn">Add to Cart</button>
-  </form>
-</div>
+            <a href="{{ product.url }}" target="_blank">
+              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title }}">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.price | money }}</p>
+            </a>
+            <button
+              class="add-to-cart-btn"
+              data-product-id="{{ product.variants.first.id }}"
+              data-title="{{ product.title }}"
+              data-price="{{ product.price | money }}"
+              data-image="{{ product.featured_image | image_url: width: 100 }}"
+            >
+              Add to Cart
+            </button>
+          </div>
 
         {% elsif section.settings.display_type == 'editorial' %}
           <div class="product-card editorial-style">
-<a href="{{ product.url }}" target="_blank">
+            <a href="{{ product.url }}" target="_blank">
               <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
               <div class="product-text">
                 <h2>{{ product.title }}</h2>
                 <p>{{ product.description | strip_html | truncatewords: 30 }}</p>
-                <p><strong>{{ product.price | money }}</strong></p>
+                <p>
+                  <strong>{{ product.price | money }}</strong>
+                </p>
               </div>
             </a>
           </div>
         {% endif %}
       {% endfor %}
     </div>
-  </div> 
-{% else %}
+  </div>
 {% endif %}
 
-
-
+<!-- Cart Drawer HTML -->
 <div class="cart-drawer">
   <h3>Your Cart</h3>
-  <p>Items will appear here after adding to cart.</p>
+  <div class="cart-items"></div>
 </div>
 
-<!-- Drawer Logic -->
-
+<!-- AJAX Add to Cart + Drawer Logic -->
 <script>
   const cartDrawer = document.querySelector(".cart-drawer");
-  const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+  const cartItems = document.querySelector(".cart-items");
 
-  addToCartButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
+  document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+    button.addEventListener("click", async () => {
+      const id = button.dataset.productId;
+
+      // Send add-to-cart request to Shopify
+      await fetch("/cart/add.js", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ id, quantity: 1 })
+      });
+
+      // Show added product in cart drawer
+      const title = button.dataset.title;
+      const price = button.dataset.price;
+      const image = button.dataset.image;
+
+      const item = document.createElement("div");
+      item.innerHTML = `
+        <div style="display:flex; gap:10px; align-items:center;">
+          <img src="${image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
+          <div>
+            <div style="font-weight:bold;">${title}</div>
+            <div style="color:#666;">${price}</div>
+          </div>
+        </div>
+      `;
+
+      cartItems.appendChild(item);
       cartDrawer.classList.add("open");
     });
   });
 
-  // Optional close logic
+  // Optional: close drawer on outside click
   document.addEventListener("click", (e) => {
     if (!cartDrawer.contains(e.target) && !e.target.classList.contains('add-to-cart-btn')) {
       cartDrawer.classList.remove("open");
     }
   });
 </script>
-
-
 
 {% schema %}
 {
