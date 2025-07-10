@@ -150,8 +150,7 @@
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </a>
-
-            <!-- Removed quantity input from here -->
+            <!-- Quantity input removed -->
 
             <button
               class="add-to-cart-btn"
@@ -191,24 +190,24 @@
 
 <!-- Cart Icon Button -->
 <li>
-  <a
+  <button
     id="open-cart-drawer"
-    href="/cart"
     style="
       position: fixed;
       bottom: 20px;
       right: 20px;
       font-size: 28px;
-      text-decoration: none;
       background: white;
       border-radius: 50%;
       padding: 10px;
+      border: none;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
       z-index: 999;
     "
   >
     🛒
-  </a>
+  </button>
 </li>
 
 <!-- JavaScript -->
@@ -219,14 +218,14 @@
     const cartItems = document.querySelector(".cart-items");
     const crossBtn = document.getElementById("cross-btn");
 
-    // Open cart
+    // Open cart drawer
     openCartBtn.addEventListener("click", function (e) {
       e.preventDefault();
       cartDrawer.classList.add("open");
       document.body.classList.add("no-scroll");
     });
 
-    // Close cart
+    // Close cart drawer
     crossBtn.addEventListener("click", () => {
       cartDrawer.classList.remove("open");
       document.body.classList.remove("no-scroll");
@@ -249,7 +248,7 @@
                 <div style="color:#666;">
                   $${(item.final_line_price / 100).toFixed(2)}<br>
                   <small>
-                    Qty: 
+                    Qty:
                     <input type="number" min="1" value="${item.quantity}" class="cart-quantity" data-line="${index + 1}" style="width:50px; padding:2px; margin-left:5px;" />
                   </small>
                 </div>
@@ -261,7 +260,7 @@
         cartItems.appendChild(itemElement);
       });
 
-      // Quantity change handler
+      // Quantity update logic
       document.querySelectorAll(".cart-quantity").forEach(input => {
         input.addEventListener("change", async () => {
           const line = input.dataset.line;
@@ -275,12 +274,12 @@
               },
               body: JSON.stringify({ line, quantity })
             });
-            await loadCart(); // Reload cart
+            await loadCart(); // Refresh cart
           }
         });
       });
 
-      // Remove item
+      // Remove item logic
       document.querySelectorAll(".remove-item").forEach(removeBtn => {
         removeBtn.addEventListener("click", async () => {
           const line = removeBtn.dataset.line;
@@ -297,7 +296,7 @@
       });
     }
 
-    // Add to cart button (always adds quantity = 1)
+    // Add to cart button (adds quantity = 1)
     document.querySelectorAll(".add-to-cart-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const id = button.dataset.productId;
@@ -317,7 +316,7 @@
       });
     });
 
-    // Click outside to close cart
+    // Close drawer on outside click
     document.addEventListener("click", (e) => {
       if (
         !cartDrawer.contains(e.target) &&
@@ -329,7 +328,7 @@
       }
     });
 
-    loadCart(); // Initial load
+    loadCart(); // Initial cart load
   });
 </script>
 
