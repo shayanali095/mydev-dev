@@ -115,17 +115,26 @@
           {% for item in cart.items %}
             <tr>
               <td>
-                <div class="cart-product">
-                  <img src="{{ item.image | image_url: width: 100 }}" width="70" height="70">
-                  <div>
-                    <a href="{{ item.url }}">{{ item.product.title }}</a><br>
-                    {% if item.variant.title != 'Default Title' %}
-                      <span class="cart-variant">{{ item.variant.title }}</span>
-                      <button>Add to Cart </button>
-                    {% endif %}
-                  </div>
-                </div>
-              </td>
+  <div class="cart-product">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="{{ item.image | image_url: width: 100 }}" width="70" height="70" style="margin-bottom: 8px;">
+
+      <form method="post" action="/cart/change">
+        <input type="hidden" name="line" value="{{ forloop.index }}">
+        <input type="hidden" name="quantity" value="{{ item.quantity | plus: 1 }}">
+        <button type="submit" class="update-button" style="padding: 6px 12px; background: #6ec1e4; color: #fff; font-size: 0.8rem; border-radius: 20px;">Add to Cart</button>
+      </form>
+    </div>
+
+    <div>
+      <a href="{{ item.url }}">{{ item.product.title }}</a><br>
+      {% if item.variant.title != 'Default Title' %}
+        <span class="cart-variant">{{ item.variant.title }}</span>
+      {% endif %}
+    </div>
+  </div>
+</td>
+
 
               <td class="cart-qty" style="text-align: center;">
                 <input type="number" name="updates[]" value="{{ item.quantity }}" min="0">
