@@ -201,76 +201,71 @@
   <h3>Your Cart</h3>
   <div class="cart-items"></div>
 </div>
-const cartDrawer = document.querySelector(".cart-drawer"); const cartItems = document.querySelector(".cart-items");
-
-// Load cart items async function loadCart() { const res = await fetch("/cart.js"); const cart = await res.json();
-
-cartItems.innerHTML = ""; // Clear old items
-
-cart.items.forEach(item => { const itemElement = document.createElement("div"); itemElement.innerHTML = `
-<div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
-  <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;">
-  <div>
-    <div style="font-weight:bold;">${item.product_title}</div>
-    <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
-  </div>
-</div>
-`; cartItems.appendChild(itemElement); }); }
 
 <script>
-  // Add-to-cart for emoji 🛒
-  document.getElementById("open-cart-drawer").addEventListener("click", async function(e) {
-    e.preventDefault();
-    const id = this.dataset.productId;
+  document.addEventListener("DOMContentLoaded", () => {
+    const openCartBtn = document.getElementById("open-cart-drawer");
+    const cartDrawer = document.querySelector(".cart-drawer");
+    const cartItems = document.querySelector(".cart-items");
 
-    if (!id) {
-      console.error("Product ID missing on emoji");
-      return;
-    }
-
-    // Add product to cart
-    await fetch("/cart/add.js", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({ id, quantity: 1 })
-    });
-
-    await loadCart();
-    cartDrawer.classList.add("open");
-    document.body.classList.add("no-scroll");
-  });
-
-  // For all other buttons
-  document.querySelectorAll(".add-to-cart-btn").forEach(button => {
-    button.addEventListener("click", async () => {
-      const id = button.dataset.productId;
-
-      await fetch("/cart/add.js", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({ id, quantity: 1 })
-      });
-
-      await loadCart();
+    // Open drawer on emoji click
+    openCartBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      console.log("Cart drawer opening...");
       cartDrawer.classList.add("open");
+      document.body.classList.add("no-scroll");
     });
-  });
 
-  window.addEventListener("DOMContentLoaded", loadCart);
-
-  // Close drawer on outside click
-  document.addEventListener("click", (e) => {
-    if (!cartDrawer.contains(e.target) && !e.target.classList.contains('add-to-cart-btn')) {
-      cartDrawer.classList.remove("open");
+    // Load cart items
+    async function loadCart() {
+      const res = await fetch("/cart.js");
+      const cart = await res.json();
+      cartItems.innerHTML = "";
+      cart.items.forEach(item => {
+        const itemElement = document.createElement("div");
+        itemElement.innerHTML = `
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
+            <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
+            <div>
+              <div style="font-weight:bold;">${item.product_title}</div>
+              <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
+            </div>
+          </div>
+        `;
+        cartItems.appendChild(itemElement);
+      });
     }
+
+    // Attach Add to Cart functionality
+    document.querySelectorAll(".add-to-cart-btn").forEach(button => {
+      button.addEventListener("click", async () => {
+        const id = button.dataset.productId;
+
+        await fetch("/cart/add.js", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify({ id, quantity: 1 })
+        });
+
+        await loadCart();
+        cartDrawer.classList.add("open");
+      });
+    });
+
+    // Close drawer if clicked outside
+    document.addEventListener("click", (e) => {
+      if (!cartDrawer.contains(e.target) && !e.target.closest("#open-cart-drawer") && !e.target.classList.contains("add-to-cart-btn")) {
+        cartDrawer.classList.remove("open");
+      }
+    });
+
+    loadCart(); // Initial load
   });
 </script>
+
 {% schema %}
 {
   "name": "Collection Products",
