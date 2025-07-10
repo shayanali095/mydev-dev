@@ -121,6 +121,7 @@
                     <a href="{{ item.url }}">{{ item.product.title }}</a><br>
                     {% if item.variant.title != 'Default Title' %}
                       <span class="cart-variant">{{ item.variant.title }}</span>
+                      <button>Add to Cart </button>
                     {% endif %}
                   </div>
                 </div>
@@ -148,7 +149,7 @@
       </div>
 
       <div style="margin-top: 30px; text-align: right;">
-        <a href="/checkout" class="checkout-button">Proceed to Checkout</a>
+        <a href="/checkout" class="checkout-button">All items Proceed to Checkout</a>
       </div>
     </form>
   {% else %}
