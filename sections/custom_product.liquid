@@ -239,18 +239,39 @@
       const res = await fetch("/cart.js");
       const cart = await res.json();
       cartItems.innerHTML = "";
-      cart.items.forEach(item => {
+
+      cart.items.forEach((item, index) => {
         const itemElement = document.createElement("div");
         itemElement.innerHTML = `
-          <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
-            <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
-            <div>
-              <div style="font-weight:bold;">${item.product_title}</div>
-              <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
+          <div style="display:flex; gap:10px; align-items:center; justify-content: space-between; margin-bottom: 10px;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
+              <div>
+                <div style="font-weight:bold;">${item.product_title}</div>
+                <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
+              </div>
             </div>
+            <span class="remove-item" data-line="${index + 1}" style="cursor:pointer; color:#cc0000; font-size:16px;">❌</span>
           </div>
         `;
         cartItems.appendChild(itemElement);
+      });
+
+      // Add remove handlers
+      document.querySelectorAll(".remove-item").forEach(removeBtn => {
+        removeBtn.addEventListener("click", async () => {
+          const line = removeBtn.dataset.line;
+          await fetch("/cart/change.js", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({ line, quantity: 0 })
+          });
+
+          await loadCart(); // Refresh cart
+        });
       });
     }
 
@@ -275,7 +296,11 @@
 
     // Click outside to close
     document.addEventListener("click", (e) => {
-      if (!cartDrawer.contains(e.target) && !e.target.closest("#open-cart-drawer") && !e.target.classList.contains("add-to-cart-btn")) {
+      if (
+        !cartDrawer.contains(e.target) &&
+        !e.target.closest("#open-cart-drawer") &&
+        !e.target.classList.contains("add-to-cart-btn")
+      ) {
         cartDrawer.classList.remove("open");
         document.body.classList.remove("no-scroll");
       }
