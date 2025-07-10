@@ -130,7 +130,7 @@
 
         {% elsif section.settings.display_type == 'editorial' %}
           <div class="product-card editorial-style">
-            <a href="{{ product.url }}">
+<a href="{{ product.url }}" target="_blank">
               <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title }}">
               <div class="product-text">
                 <h2>{{ product.title }}</h2>
@@ -144,7 +144,6 @@
     </div>
   </div>
 {% else %}
-  <p>Please select a collection from the section settings.</p>
 {% endif %}
 
 
