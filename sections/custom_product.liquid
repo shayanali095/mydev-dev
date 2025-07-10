@@ -183,14 +183,16 @@
 
 <!-- AJAX Add to Cart + Drawer Logic -->
 <script>
+  <script>
   const cartDrawer = document.querySelector(".cart-drawer");
   const cartItems = document.querySelector(".cart-items");
 
   document.querySelectorAll(".add-to-cart-btn").forEach(button => {
-    button.addEventListener("click", async () => {
+    button.addEventListener("click", async (e) => {
+      e.stopPropagation(); // Prevent event from reaching the outer click listener
+
       const id = button.dataset.productId;
 
-      // Send add-to-cart request to Shopify
       await fetch("/cart/add.js", {
         method: "POST",
         headers: {
@@ -200,7 +202,6 @@
         body: JSON.stringify({ id, quantity: 1 })
       });
 
-      // Show added product in cart drawer
       const title = button.dataset.title;
       const price = button.dataset.price;
       const image = button.dataset.image;
@@ -221,12 +222,16 @@
     });
   });
 
-  // Optional: close drawer on outside click
-  document.addEventListener("click", (e) => {
-    if (!cartDrawer.contains(e.target) && !e.target.classList.contains('add-to-cart-btn')) {
+  // ✅ Better outside click detection
+  document.addEventListener("click", function (event) {
+    const isClickInsideDrawer = cartDrawer.contains(event.target);
+    const isAddToCartBtn = event.target.classList.contains("add-to-cart-btn");
+
+    if (!isClickInsideDrawer && !isAddToCartBtn) {
       cartDrawer.classList.remove("open");
     }
   });
+</script>
 </script>
 
 {% schema %}
