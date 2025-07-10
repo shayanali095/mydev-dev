@@ -198,6 +198,7 @@
 
 <!-- Cart Drawer HTML -->
 <div class="cart-drawer">
+  <id cross-btn> ❌ </id>
   <h3>Your Cart</h3>
   <div class="cart-items"></div>
 </div>
@@ -211,7 +212,6 @@
     // Open drawer on emoji click
     openCartBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      console.log("Cart drawer opening...");
       cartDrawer.classList.add("open");
       document.body.classList.add("no-scroll");
     });
@@ -236,7 +236,6 @@
       });
     }
 
-    // Attach Add to Cart functionality
     document.querySelectorAll(".add-to-cart-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const id = button.dataset.productId;
@@ -255,7 +254,6 @@
       });
     });
 
-    // Close drawer if clicked outside
     document.addEventListener("click", (e) => {
       if (!cartDrawer.contains(e.target) && !e.target.closest("#open-cart-drawer") && !e.target.classList.contains("add-to-cart-btn")) {
         cartDrawer.classList.remove("open");
