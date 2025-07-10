@@ -18,7 +18,7 @@
 
   .product-card.grid-style {
     width: 240px;
-    height: 370px;
+    height: 400px;
     text-align: center;
     border: 1px solid #eee;
     padding: 15px;
@@ -50,39 +50,13 @@
     color: #333;
   }
 
-  .product-display.layout-editorial {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .product-card.editorial-style {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
-  }
-
-  .product-card.editorial-style img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  .product-card.editorial-style .product-text {
-    max-width: 600px;
-  }
-
-  .product-card.editorial-style h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-
-  .product-card.editorial-style p {
-    margin-bottom: 8px;
-    line-height: 1.5;
+  .product-quantity {
+    width: 60px;
+    padding: 6px;
+    margin: 0 auto 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
   }
 
   .add-to-cart-btn {
@@ -177,6 +151,13 @@
               <h3>{{ product.title }}</h3>
               <p>{{ product.price | money }}</p>
             </a>
+            <input
+              type="number"
+              min="1"
+              value="1"
+              class="product-quantity"
+              data-product-id="{{ product.variants.first.id }}"
+            >
             <button
               class="add-to-cart-btn"
               data-product-id="{{ product.variants.first.id }}"
@@ -248,7 +229,7 @@
               <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; border-radius:5px;" />
               <div>
                 <div style="font-weight:bold;">${item.product_title}</div>
-                <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}</div>
+                <div style="color:#666;">$${(item.final_line_price / 100).toFixed(2)}<br><small>Qty: ${item.quantity}</small></div>
               </div>
             </div>
             <span class="remove-item" data-line="${index + 1}" style="cursor:pointer; color:#cc0000; font-size:16px;">✘</span>
@@ -257,7 +238,7 @@
         cartItems.appendChild(itemElement);
       });
 
-      // Add remove handlers
+      // Remove item
       document.querySelectorAll(".remove-item").forEach(removeBtn => {
         removeBtn.addEventListener("click", async () => {
           const line = removeBtn.dataset.line;
@@ -275,10 +256,14 @@
       });
     }
 
-    // Add to cart button handler
+    // Add to cart button handler with quantity
     document.querySelectorAll(".add-to-cart-btn").forEach(button => {
       button.addEventListener("click", async () => {
         const id = button.dataset.productId;
+        const quantityInput = document.querySelector(
+          `.product-quantity[data-product-id="${id}"]`
+        );
+        const quantity = parseInt(quantityInput?.value || "1");
 
         await fetch("/cart/add.js", {
           method: "POST",
@@ -286,7 +271,7 @@
             "Content-Type": "application/json",
             "Accept": "application/json"
           },
-          body: JSON.stringify({ id, quantity: 1 })
+          body: JSON.stringify({ id, quantity })
         });
 
         await loadCart();
@@ -294,7 +279,7 @@
       });
     });
 
-    // Click outside to close
+    // Click outside to close drawer
     document.addEventListener("click", (e) => {
       if (
         !cartDrawer.contains(e.target) &&
